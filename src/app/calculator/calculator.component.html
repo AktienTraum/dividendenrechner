@@ -1,8 +1,89 @@
-<h2>Dividendenrechner</h2>
+<div class="calculator">
 
-<p>Hier entsteht der neue AktienTraum Dividendenrechner.</p>
+  <div>
+    <h2>Dividendenrechner</h2>
 
-<p>Solange diese Meldung erscheint, sollte noch der <a href="https://aktientraum.de/">bisherige Dividendenrechner</a>
-  genutzt werden. Dies hier ist
-  work-in-progress :-)</p>
+    <p>Hier entsteht der neue AktienTraum Dividendenrechner.</p>
+
+    <p>Solange diese Meldung erscheint, sollte noch der <a href="https://aktientraum.de/">bisherige
+      Dividendenrechner</a>
+      genutzt werden. Dies hier ist
+      work-in-progress :-)</p>
+  </div>
+
+  <div *ngIf="showResult">
+    <div class="disclaimer">
+      Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit
+      der Ergebnisse übernommen!
+    </div>
+  </div>
+
+  <form [formGroup]="calculatorForm">
+
+    <div class="formContainer">
+
+      <div class="inputHeader">
+        Berechnungsgrundlage
+      </div>
+
+      <div>
+        <mat-slider
+          [max]="100"
+          [min]="1"
+          [step]="1"
+          [discrete]="true"
+          [showTickMarks]="true">
+          <input matSliderThumb formControlName="years" #slider>
+        </mat-slider>
+      </div>
+      <div class="yearSlider">
+        Jahre zum Investieren: {{ getYears() }} (bis {{ getUntilYear() }})
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Bereits investiertes Kapital (€)</mat-label>
+          <input matInput type="number" formControlName="initialInvestment">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Investitionsbetrag pro Jahr (€)</mat-label>
+          <input matInput type="number" formControlName="yearlyInvestment">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Jährliche Steigerung (€)</mat-label>
+          <input matInput type="number" formControlName="yearlyIncrease">
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Re-Investition erhaltener Dividenden (%)</mat-label>
+          <input matInput type="number" formControlName="dividendReinvestmentPercentage">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Initiale jährliche Dividendenrendite (%)</mat-label>
+          <input matInput type="number" formControlName="dividendPercentage">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Jährliche Steigerung der Dividende (%)</mat-label>
+          <input matInput type="number" formControlName="dividendPercentageIncrease">
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-fab extended (click)="doCalculate()">
+          <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
+          Berechnen
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+
+</div>
 

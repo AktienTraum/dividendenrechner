@@ -4,7 +4,7 @@
 
 .icon {
   color: white;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .header {
@@ -22,31 +22,29 @@
 }
 
 .mainTitle {
-  font-family: "Roboto Light", sans-serif;
   color: cornflowerblue;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: bold;
 }
 
 .subTitle {
-  font-family: "Roboto Light", sans-serif;
   color: white;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: bold;
+  margin-left: 2px;
 }
 
 .mainMenu {
   display: flex;
   margin-left: 64px;
-  margin-top: 28px;
+  margin-top: 18px;
 }
 
 .mainMenuItem {
   display: flex;
   align-items: center;
-  font-family: "Roboto Light", sans-serif;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
   margin-right: 16px;
 }
@@ -102,7 +100,6 @@
   font-size: 18px;
   cursor: pointer;
 }
-
 
 mat-icon {
   margin-right: 8px;
