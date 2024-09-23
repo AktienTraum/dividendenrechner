@@ -16,13 +16,28 @@
       Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit
       der Ergebnisse übernommen!
     </div>
+
+    <div>
+      <table>
+        <tr>
+          <th>Jahr</th>
+          <th>Einzahlung</th>
+        </tr>
+        <tr *ngFor="let elem of simulationPerYear">
+          <td>{{ getAndIncreaseYear() }}</td>
+          <td>{{ (elem.purchaseValue * elem.amount) }}</td>
+        </tr>
+      </table>
+    </div>
+
+
   </div>
 
   <form [formGroup]="calculatorForm">
 
     <div class="formContainer">
 
-      <div class="inputHeader">
+      <div class="header">
         Berechnungsgrundlage
       </div>
 

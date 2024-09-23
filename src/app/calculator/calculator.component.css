@@ -11,7 +11,7 @@
 
 }
 
-.inputHeader {
+.header {
   width: 100%;
   background: #DFDFFE;
   font-weight: bold;
@@ -20,6 +20,7 @@
   padding-bottom: 8px;
   padding-left: 16px;
   margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 .yearSlider {
