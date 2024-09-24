@@ -23,8 +23,7 @@ export class CalculatorService {
       parameters.initialDividendPercentage,
       currentStockPrice);
 
-    let stockAmount = result[0].shares.stockAmount;
-    let accumulatedDividendPayout = result[0].kpis.accumulatedDividendPayout;
+    let accumulatedStockAmount = result[0].shares.stockAmount;
     let accumulatedPayments = result[0].kpis.accumulatedPayments
     let investedSumPerYear = parameters.yearlyInvestment;
 
@@ -35,23 +34,30 @@ export class CalculatorService {
         currentDividendPercentage,
         parameters.yearlyDividendPercentageIncrease);
 
-      stockAmount += investedSumPerYear / currentStockPrice;
+      let yearlyStockAmount = this.calculateStockAmount(investedSumPerYear, currentStockPrice);
+      accumulatedStockAmount += yearlyStockAmount + result[i - 1].shares.stocksBoughtFromDividends;
 
-      let dividendPayout = this.calculateDividendPayout(stockAmount, currentStockPrice, currentDividendPercentage);
-      accumulatedDividendPayout += dividendPayout;
+      let dividendPayout = this.calculateDividendPayout(accumulatedStockAmount, currentStockPrice, currentDividendPercentage);
+      let dividendPayoutWithPreviousDividendPercentage =
+        this.calculateDividendPayout(accumulatedStockAmount, currentStockPrice, result[i - 1].kpis.dividendPercentage);
+      let stocksBoughtFromDividens = this.calculateStockAmount(dividendPayout, currentStockPrice);
+      let investedDividends = this.calculateInvestedDividends(dividendPayout, parameters.dividendReinvestmentPercentage);
 
       result[i] = {
         shares: {
           payment: investedSumPerYear,
-          stockAmount: stockAmount,
+          stockAmount: yearlyStockAmount,
+          stocksBoughtFromDividends: stocksBoughtFromDividens,
           purchasePrice: currentStockPrice
         },
         kpis: {
-          stockAmount: stockAmount,
+          accumulatedStockAmount: accumulatedStockAmount,
           dividendPayout: dividendPayout,
           dividendPercentage: currentDividendPercentage,
           accumulatedPayments: accumulatedPayments,
-          accumulatedDividendPayout: accumulatedDividendPayout,
+          accumulatedPaymentsIncludingDividends: investedSumPerYear + investedDividends,
+          yearlyInvestmentToReinvestedDividendFactor: investedDividends / investedSumPerYear,
+          yearlyAbsoluteDividendGrowth: dividendPayout - dividendPayoutWithPreviousDividendPercentage,
         }
       } as CalculationIF;
 
@@ -72,14 +78,18 @@ export class CalculatorService {
       shares: {
         payment: initialInvestment,
         stockAmount: initialStockAmount,
+        stocksBoughtFromDividends: 0,
         purchasePrice: currentStockPrice,
       },
       kpis: {
-        stockAmount: initialStockAmount,
+        accumulatedStockAmount: initialStockAmount,
         dividendPayout: dividendPayout,
         dividendPercentage: dividendPercentage,
         accumulatedDividendPayout: dividendPayout,
         accumulatedPayments: initialInvestment,
+        accumulatedPaymentsIncludingDividends: initialInvestment,
+        yearlyInvestmentToReinvestedDividendFactor: 0,
+        yearlyAbsoluteDividendGrowth: 0,
       }
     } as CalculationIF;
   }
@@ -94,5 +104,9 @@ export class CalculatorService {
 
   private calculateDividendPercentage(currentDividendPercentage: number, dividendPercentageIncrease: number) {
     return currentDividendPercentage * (1 + (dividendPercentageIncrease / 100));
+  }
+
+  private calculateInvestedDividends(dividendPayout: number, dividendReinvestmentPercentage: number) {
+    return dividendPayout * dividendReinvestmentPercentage / 100;
   }
 }

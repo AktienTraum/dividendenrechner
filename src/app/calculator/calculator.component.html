@@ -18,27 +18,44 @@
     </div>
 
     <div>
+      <mat-slide-toggle
+        [checked]="showStockColumns"
+        (click)="showStockColumns = !showStockColumns">
+        Zeige Aktien-Spalten
+      </mat-slide-toggle>
+    </div>
+
+    <div>
       <table>
         <tr class="tableHeader">
           <th>Jahr</th>
-          <th>Aktien Gesamt</th>
-          <th>Aktien Jahr</th>
+          <th *ngIf="showStockColumns"
+              matTooltip="Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.">
+            Simulierter Aktienkurs
+          </th>
+          <th *ngIf="showStockColumns">Aktien Gesamt</th>
+          <th *ngIf="showStockColumns">Aktien Jahr</th>
+          <th *ngIf="showStockColumns">Aktien Dividende (Jahresende)</th>
           <th>Einzahlung Gesamt (€)</th>
-          <th>Einzahlung aktuelles Jahr inkl. reinvestierte Dividenden (€)</th>
           <th>Einzahlung aktuelles Jahr (€)</th>
+          <th>Einzahlung aktuelles Jahr inkl. reinvestierte Dividenden (€)</th>
           <th>Dividenden aktuelles Jahr (€)</th>
-          <th>Dividenden Gesamt (€)</th>
+          <th>Dividendenveränderung (€)</th>
+          <th>Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)</th>
           <th>Dividendenrendite (%)</th>
         </tr>
         <tr *ngFor="let elem of result; let y = index">
           <td>{{ currentYear + y }}</td>
-          <td>{{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.stockAmount | number:'1.2-2':'de-DE' }}</td>
+          <td *ngIf="showStockColumns">{{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}</td>
+          <td *ngIf="showStockColumns">{{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }}</td>
+          <td *ngIf="showStockColumns">{{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}</td>
+          <td *ngIf="showStockColumns">{{ elem.shares.stocksBoughtFromDividends | number:'1.2-2':'de-DE' }}</td>
           <td>{{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}</td>
-          <td></td>
           <td>{{ elem.shares.payment | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}</td>
           <td>{{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.accumulatedDividendPayout | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}</td>
           <td>{{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}</td>
         </tr>
       </table>

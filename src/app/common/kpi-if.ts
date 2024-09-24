@@ -1,7 +1,9 @@
 export interface KpiIF {
-  stockAmount: number,
   dividendPayout: number,
   dividendPercentage: number,
+  accumulatedStockAmount: number,
   accumulatedPayments: number,
-  accumulatedDividendPayout: number,
+  accumulatedPaymentsIncludingDividends: number,
+  yearlyInvestmentToReinvestedDividendFactor: number,
+  yearlyAbsoluteDividendGrowth: number,
 }

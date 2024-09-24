@@ -11,12 +11,14 @@ import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {CalculatorService} from "./calculator.service";
 import {ParameterIF} from "../common/parameter-if";
 import {CalculationIF} from "../common/calculation-if";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -29,6 +31,7 @@ export class CalculatorComponent {
 
   calculatorForm!: FormGroup;
   showResult = false;
+  showStockColumns = false;
 
   currentYear!: number;
 
