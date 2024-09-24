@@ -54,4 +54,18 @@ mat-form-field {
   margin-top: 8px;
 }
 
+.tableHeader {
+  background-color: #DFDFFE;
+  color: #000000;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px 15px;
+}
+
+tr:nth-child(even) {
+  background-color: #EEEEEE;
+}
+
 

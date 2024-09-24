@@ -4,6 +4,9 @@ import {CalculatorComponent} from "./calculator/calculator.component";
 import {MatIcon} from "@angular/material/icon";
 import {ImprintComponent} from "./imprint/imprint.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {registerLocaleData} from "@angular/common";
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 
 @Component({
   selector: 'app-root',
@@ -13,15 +16,14 @@ import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component"
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  currentPage = 'calculator';
-
+  
   constructor(private router: Router) {
+    registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   }
 
   openGithub() {
     window.open('https://github.com/AktienTraum/dividendenrechner', '_blank');
   }
-
 
   showCalculator() {
     this.router.navigate(['/calculator']);

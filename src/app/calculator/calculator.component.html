@@ -19,13 +19,25 @@
 
     <div>
       <table>
-        <tr>
+        <tr class="tableHeader">
           <th>Jahr</th>
-          <th>Einzahlung</th>
+          <th>Aktien Gesamt</th>
+          <th>Aktien Jahr</th>
+          <th>Einzahlung Gesamt (€)</th>
+          <th>Einzahlung aktuelles Jahr (€)</th>
+          <th>Dividenden aktuelles Jahr (€)</th>
+          <th>Dividenden Gesamt (€)</th>
+          <th>Dividendenrendite (%)</th>
         </tr>
-        <tr *ngFor="let elem of simulationPerYear">
-          <td>{{ getAndIncreaseYear() }}</td>
-          <td>{{ (elem.purchaseValue * elem.amount) }}</td>
+        <tr *ngFor="let elem of simulationPerYear; let y = index">
+          <td>{{ currentYear + y }}</td>
+          <td>{{ elem.amount | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ kpisPerYear[y].stockAmount | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ kpisPerYear[y].accumulatedPayments | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ elem.payment | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ kpisPerYear[y].dividendPayout | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ kpisPerYear[y].accumulatedDividendPayout | number:'1.2-2':'de-DE' }}</td>
+          <td>{{ kpisPerYear[y].dividendPercentage | number:'1.2-2':'de-DE' }}</td>
         </tr>
       </table>
     </div>
