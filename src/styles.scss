@@ -21,5 +21,28 @@ html {
   height: 100%;
 }
 
+.icon {
+  color: #222222;
+  transform: scale(1.3);
+  margin-right: 8px;
+}
+
+.page {
+  padding-top: 16px;
+}
+
+.paragraph {
+  font-size: 16px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  color: #222222;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 16px;
+}
+
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);

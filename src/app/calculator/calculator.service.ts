@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {CalculationIF} from "../common/calculation-if";
-import {ParameterIF} from "../common/parameter-if";
+import {CalculationIF} from "./interfaces/calculation-if";
+import {ParameterIF} from "./interfaces/parameter-if";
 
 
 @Injectable({
@@ -24,11 +24,13 @@ export class CalculatorService {
       currentStockPrice);
 
     let accumulatedStockAmount = result[0].shares.stockAmount;
-    let accumulatedPayments = result[0].kpis.accumulatedPayments
+    let accumulatedPayments = result[0].kpis.accumulatedPayments;
+    let accumulatedPaymentsIncludingDividends = accumulatedPayments;
     let investedSumPerYear = parameters.yearlyInvestment;
 
     for (let i = 1; i <= parameters.years; i++) {
       accumulatedPayments += investedSumPerYear;
+      accumulatedPaymentsIncludingDividends += investedSumPerYear;
 
       currentDividendPercentage = this.calculateDividendPercentage(
         currentDividendPercentage,
@@ -43,6 +45,8 @@ export class CalculatorService {
       let stocksBoughtFromDividens = this.calculateStockAmount(dividendPayout, currentStockPrice);
       let investedDividends = this.calculateInvestedDividends(dividendPayout, parameters.dividendReinvestmentPercentage);
 
+      accumulatedPaymentsIncludingDividends += dividendPayout;
+
       result[i] = {
         shares: {
           payment: investedSumPerYear,
@@ -53,9 +57,10 @@ export class CalculatorService {
         kpis: {
           accumulatedStockAmount: accumulatedStockAmount,
           dividendPayout: dividendPayout,
+          dividendPayoutReinvested: investedDividends,
           dividendPercentage: currentDividendPercentage,
           accumulatedPayments: accumulatedPayments,
-          accumulatedPaymentsIncludingDividends: investedSumPerYear + investedDividends,
+          accumulatedPaymentsIncludingDividends: accumulatedPaymentsIncludingDividends,
           yearlyInvestmentToReinvestedDividendFactor: investedDividends / investedSumPerYear,
           yearlyAbsoluteDividendGrowth: dividendPayout - dividendPayoutWithPreviousDividendPercentage,
         }
@@ -84,6 +89,7 @@ export class CalculatorService {
       kpis: {
         accumulatedStockAmount: initialStockAmount,
         dividendPayout: dividendPayout,
+        dividendPayoutReinvested: dividendPayout,
         dividendPercentage: dividendPercentage,
         accumulatedDividendPayout: dividendPayout,
         accumulatedPayments: initialInvestment,

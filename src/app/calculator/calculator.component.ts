@@ -9,16 +9,17 @@ import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {MatFabButton} from "@angular/material/button";
 import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import {CalculatorService} from "./calculator.service";
-import {ParameterIF} from "../common/parameter-if";
-import {CalculationIF} from "../common/calculation-if";
+import {ParameterIF} from "./interfaces/parameter-if";
+import {CalculationIF} from "./interfaces/calculation-if";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatTooltip} from "@angular/material/tooltip";
+import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -74,5 +75,11 @@ export class CalculatorComponent {
 
   getYears(): number {
     return this.calculatorForm.controls['years'].value;
+  }
+
+  getAccumulatedDividends() {
+    let sum = 0;
+    this.result.forEach(y => sum += y.kpis.dividendPayout);
+    return sum;
   }
 }

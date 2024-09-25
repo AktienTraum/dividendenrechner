@@ -7,16 +7,17 @@ import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component"
 import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import {CommunityComponent} from "./community/community.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent],
+  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+
   constructor(private router: Router) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   }
@@ -29,6 +30,10 @@ export class AppComponent {
     this.router.navigate(['/calculator']);
   }
 
+  showCommunity() {
+    this.router.navigate(['/community']);
+  }
+
   showImpressum() {
     this.router.navigate(['/imprint']);
   }
@@ -39,6 +44,10 @@ export class AppComponent {
 
   calculatorPage() {
     return this.router.url.includes('calculator') || this.router.url == '/';
+  }
+
+  communityPage() {
+    return this.router.url.includes('community');
   }
 
   imprintPage() {

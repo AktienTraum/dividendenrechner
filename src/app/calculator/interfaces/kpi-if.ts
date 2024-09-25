@@ -1,5 +1,6 @@
 export interface KpiIF {
   dividendPayout: number,
+  dividendPayoutReinvested: number,
   dividendPercentage: number,
   accumulatedStockAmount: number,
   accumulatedPayments: number,

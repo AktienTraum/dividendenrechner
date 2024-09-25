@@ -5,6 +5,7 @@ import {NgModule} from "@angular/core";
 export const routes: Routes = [
   {path: '', component: AppComponent}, //default route
   {path: 'calculator', component: AppComponent},
+  {path: 'community', component: AppComponent},
   {path: 'imprint', component: AppComponent},
   {path: 'privacy-policy', component: AppComponent},
 ];

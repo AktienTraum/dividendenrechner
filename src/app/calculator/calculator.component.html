@@ -1,14 +1,24 @@
-<div class="calculator">
+<div class="page">
+
+  <div class="pageHeader">
+    <mat-icon class="icon" fontSet="material-symbols-rounded">function</mat-icon>
+    <h1>Dividendenrechner</h1>
+  </div>
 
   <div>
-    <h2>Dividendenrechner</h2>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <h2>Work-in-Progress</h2>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Hier entsteht der neue AktienTraum Dividendenrechner.</p>
 
-    <p>Hier entsteht der neue AktienTraum Dividendenrechner.</p>
-
-    <p>Solange diese Meldung erscheint, sollte noch der <a href="https://aktientraum.de/">bisherige
-      Dividendenrechner</a>
-      genutzt werden. Dies hier ist
-      work-in-progress :-)</p>
+        <p>Solange diese Meldung erscheint, sollte noch der <a href="https://aktientraum.de/">bisherige
+          Dividendenrechner</a>
+          genutzt werden. Dies hier ist
+          work-in-progress :-)</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <div *ngIf="showResult">
@@ -17,116 +27,165 @@
       der Ergebnisse übernommen!
     </div>
 
-    <div>
-      <mat-slide-toggle
-        [checked]="showStockColumns"
-        (click)="showStockColumns = !showStockColumns">
-        Zeige Aktien-Spalten
-      </mat-slide-toggle>
-    </div>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <h2>Entwicklung über die Zeit</h2>
+      </mat-card-header>
+      <mat-card-content>
+
+        <div>
+          <mat-slide-toggle
+            [checked]="showStockColumns"
+            (click)="showStockColumns = !showStockColumns">
+            Zeige Aktien-Simulation
+          </mat-slide-toggle>
+        </div>
+
+        <div>
+          <table>
+            <tr class="tableHeader">
+              <th>Jahr</th>
+              <th *ngIf="showStockColumns"
+                  matTooltip="Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.">
+                Simulierter Aktienkurs
+              </th>
+              <th *ngIf="showStockColumns">Aktien Gesamt</th>
+              <th *ngIf="showStockColumns">Aktien Jahr</th>
+              <th *ngIf="showStockColumns">Aktien Dividende (Jahresende)</th>
+              <th>Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</th>
+              <th>Einzahlung Summe (ohne reinvestierte Dividenden) (€)</th>
+              <th>Einzahlung aktuelles Jahr (€)</th>
+              <th>Dividenden aktuelles Jahr (€)</th>
+              <th>Reinvestierte Dividenden aktuelles Jahr (€)</th>
+              <th>Veränderung Dividende (€)</th>
+              <th>Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)</th>
+              <th>Dividenden-Rendite (%)</th>
+            </tr>
+            <tr *ngFor="let elem of result; let y = index">
+              <td>{{ currentYear + y }}</td>
+              <td *ngIf="showStockColumns">{{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.shares.stocksBoughtFromDividends | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.shares.payment | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}</td>
+              <td>{{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}</td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <p></p>
 
     <div>
-      <table>
-        <tr class="tableHeader">
-          <th>Jahr</th>
-          <th *ngIf="showStockColumns"
-              matTooltip="Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.">
-            Simulierter Aktienkurs
-          </th>
-          <th *ngIf="showStockColumns">Aktien Gesamt</th>
-          <th *ngIf="showStockColumns">Aktien Jahr</th>
-          <th *ngIf="showStockColumns">Aktien Dividende (Jahresende)</th>
-          <th>Einzahlung Gesamt (€)</th>
-          <th>Einzahlung aktuelles Jahr (€)</th>
-          <th>Einzahlung aktuelles Jahr inkl. reinvestierte Dividenden (€)</th>
-          <th>Dividenden aktuelles Jahr (€)</th>
-          <th>Dividendenveränderung (€)</th>
-          <th>Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)</th>
-          <th>Dividendenrendite (%)</th>
-        </tr>
-        <tr *ngFor="let elem of result; let y = index">
-          <td>{{ currentYear + y }}</td>
-          <td *ngIf="showStockColumns">{{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}</td>
-          <td *ngIf="showStockColumns">{{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }}</td>
-          <td *ngIf="showStockColumns">{{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}</td>
-          <td *ngIf="showStockColumns">{{ elem.shares.stocksBoughtFromDividends | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.shares.payment | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}</td>
-          <td>{{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}</td>
-        </tr>
-      </table>
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <h2>Zusammenfassung</h2>
+        </mat-card-header>
+        <mat-card-content>
+          <table>
+            <tr class="tableHeader">
+              <th colspan="2" class="summary">Zusammenfassung und passives Einkommen ab dem
+                Jahr {{ currentYear + getYears() + 1 }}
+              </th>
+            </tr>
+            <tr>
+              <td class="summaryCell">Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</td>
+              <td
+                class="summaryCell">{{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+              </td>
+            </tr>
+            <tr>
+              <td class="summaryCell">Einzahlung Summe (ohne reinvestierte Dividenden) (€)</td>
+              <td
+                class="summaryCell">{{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+              </td>
+            </tr>
+            <tr>
+              <td class="summaryCell">Dividenden über {{ getYears() }} Jahre (€)</td>
+              <td
+                class="summaryCell">{{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
+              </td>
+            </tr>
+
+          </table>
+        </mat-card-content>
+      </mat-card>
     </div>
-
-
   </div>
 
+  <p></p>
+
   <form [formGroup]="calculatorForm">
-
     <div class="formContainer">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <h2>Berechnungsgrundlage</h2>
+        </mat-card-header>
+        <mat-card-content>
 
-      <div class="header">
-        Berechnungsgrundlage
-      </div>
+          <div>
+            <mat-slider
+              [max]="100"
+              [min]="1"
+              [step]="1"
+              [discrete]="true"
+              [showTickMarks]="true">
+              <input matSliderThumb formControlName="years" #slider>
+            </mat-slider>
+          </div>
+          <div class="yearSlider">
+            Jahre zum Investieren: {{ getYears() }} (bis {{ getUntilYear() }})
+          </div>
 
-      <div>
-        <mat-slider
-          [max]="100"
-          [min]="1"
-          [step]="1"
-          [discrete]="true"
-          [showTickMarks]="true">
-          <input matSliderThumb formControlName="years" #slider>
-        </mat-slider>
-      </div>
-      <div class="yearSlider">
-        Jahre zum Investieren: {{ getYears() }} (bis {{ getUntilYear() }})
-      </div>
+          <div class="formRow">
+            <mat-form-field>
+              <mat-label>Bereits investiertes Kapital (€)</mat-label>
+              <input matInput type="number" formControlName="initialInvestment">
+            </mat-form-field>
 
-      <div class="formRow">
-        <mat-form-field>
-          <mat-label>Bereits investiertes Kapital (€)</mat-label>
-          <input matInput type="number" formControlName="initialInvestment">
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>Investitionsbetrag pro Jahr (€)</mat-label>
+              <input matInput type="number" formControlName="yearlyInvestment">
+            </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Investitionsbetrag pro Jahr (€)</mat-label>
-          <input matInput type="number" formControlName="yearlyInvestment">
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>Jährliche Steigerung (€)</mat-label>
+              <input matInput type="number" formControlName="yearlyInvestmentIncrease">
+            </mat-form-field>
+          </div>
 
-        <mat-form-field>
-          <mat-label>Jährliche Steigerung (€)</mat-label>
-          <input matInput type="number" formControlName="yearlyInvestmentIncrease">
-        </mat-form-field>
-      </div>
+          <div class="formRow">
+            <mat-form-field>
+              <mat-label>Re-Investition erhaltener Dividenden (%)</mat-label>
+              <input matInput type="number" formControlName="dividendReinvestmentPercentage">
+            </mat-form-field>
 
-      <div class="formRow">
-        <mat-form-field>
-          <mat-label>Re-Investition erhaltener Dividenden (%)</mat-label>
-          <input matInput type="number" formControlName="dividendReinvestmentPercentage">
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>Initiale jährliche Dividendenrendite (%)</mat-label>
+              <input matInput type="number" formControlName="initialDividendPercentage">
+            </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Initiale jährliche Dividendenrendite (%)</mat-label>
-          <input matInput type="number" formControlName="initialDividendPercentage">
-        </mat-form-field>
+            <mat-form-field>
+              <mat-label>Jährliche Steigerung der Dividende (%)</mat-label>
+              <input matInput type="number" formControlName="yearlyDividendPercentageIncrease">
+            </mat-form-field>
+          </div>
 
-        <mat-form-field>
-          <mat-label>Jährliche Steigerung der Dividende (%)</mat-label>
-          <input matInput type="number" formControlName="yearlyDividendPercentageIncrease">
-        </mat-form-field>
-      </div>
-
-      <div class="button-container">
-        <button mat-fab extended (click)="doCalculate()">
-          <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
-          Berechnen
-        </button>
-      </div>
-
+          <div class="button-container">
+            <button mat-fab extended (click)="doCalculate()">
+              <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
+              Berechnen
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </form>
 </div>

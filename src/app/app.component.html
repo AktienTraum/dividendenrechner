@@ -12,12 +12,12 @@
 
     <div class="mainMenu">
       <div class="mainMenuItem" (click)="showCalculator()">
-        <mat-icon class="icon" fontSet="material-symbols-rounded">calculate</mat-icon>
+        <mat-icon class="icon" fontSet="material-symbols-rounded">function</mat-icon>
         Dividendenrechner
       </div>
-      <div class="mainMenuItem" (click)="openGithub()">
-        <mat-icon class="icon" fontSet="material-symbols-rounded">integration_instructions</mat-icon>
-        Source Code auf Github
+      <div class="mainMenuItem" (click)="showCommunity()">
+        <mat-icon class="icon" fontSet="material-symbols-rounded">groups</mat-icon>
+        Community
       </div>
     </div>
 
@@ -26,6 +26,12 @@
   @if (calculatorPage()) {
     <div class="content">
       <app-calculator></app-calculator>
+    </div>
+  }
+
+  @if (communityPage()) {
+    <div class="content">
+      <app-community></app-community>
     </div>
   }
 
@@ -43,7 +49,7 @@
 
   <div class="footer">
     <div>
-      <img src="images/logo.png" width="200px" height="200px"/>
+      <img src="images/logo.png" width="250px" height="250px"/>
     </div>
 
     <div class="citation">
@@ -64,8 +70,10 @@
         <span class="footerMenuItem" (click)="showPrivacyPolicy()">Datenschutzerklärung</span>
       </p>
     </div>
+  </div>
 
-
+  <div class="copyright">
+    Copyright © 2024 AktienTraum
   </div>
 
 </div>
