@@ -3,4 +3,6 @@ export interface SharesIF {
   stockAmount: number,
   stocksBoughtFromDividends: number,
   purchasePrice: number,
+  averagePurchasePrice: number,
+  dividendPayout: number,
 }

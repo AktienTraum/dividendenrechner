@@ -7,4 +7,5 @@ export interface KpiIF {
   accumulatedPaymentsIncludingDividends: number,
   yearlyInvestmentToReinvestedDividendFactor: number,
   yearlyAbsoluteDividendGrowth: number,
+  year: number,
 }

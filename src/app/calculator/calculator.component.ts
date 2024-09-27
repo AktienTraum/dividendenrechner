@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, numberAttribute} from '@angular/core';
+import {ChangeDetectionStrategy, Component, numberAttribute, OnInit} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
@@ -14,12 +14,15 @@ import {CalculationIF} from "./interfaces/calculation-if";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
+import {SeriesIF} from "./interfaces/series-if";
+import {NewsComponent} from "../news/news.component";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -28,7 +31,7 @@ import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
   ]
 })
 
-export class CalculatorComponent {
+export class CalculatorComponent implements OnInit {
 
   calculatorForm!: FormGroup;
   showResult = false;
@@ -38,10 +41,19 @@ export class CalculatorComponent {
 
   result: CalculationIF[] = [];
 
+  data: any;
+  view: [number, number] = [900, 450];
+  legendTitle = 'Legende';
+
   constructor(private calculatorService: CalculatorService) {
     this.currentYear = new Date().getFullYear();
     this.initForm();
+  }
 
+  ngOnInit(): void {
+    this.calculatorForm.valueChanges.subscribe(value => {
+      this.showResult = false;
+    });
   }
 
   initForm() {
@@ -53,6 +65,7 @@ export class CalculatorComponent {
       initialDividendPercentage: new FormControl(numberAttribute(3.5)),
       yearlyDividendPercentageIncrease: new FormControl(numberAttribute(5)),
       years: new FormControl(numberAttribute(10)),
+      priceGainPercentage: new FormControl(numberAttribute(3)),
     });
   }
 
@@ -66,7 +79,34 @@ export class CalculatorComponent {
       initialDividendPercentage: this.calculatorForm.controls['initialDividendPercentage'].value,
       yearlyDividendPercentageIncrease: this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value,
       years: this.calculatorForm.controls['years'].value,
+      currentYear: this.currentYear,
+      priceGainPercentage: this.calculatorForm.controls['priceGainPercentage'].value,
     } as ParameterIF);
+
+    let dividendSeries = this.result
+      .filter(x => x.kpis.year != this.currentYear)
+      .map(x => ({
+        value: x.kpis.dividendPayout,
+        name: x.kpis.year.toString()
+      } as SeriesIF));
+
+    let investedSeries = this.result
+      .filter(x => x.kpis.year != this.currentYear)
+      .map(x => ({
+        value: x.shares.payment,
+        name: x.kpis.year.toString()
+      } as SeriesIF));
+
+    this.data = [
+      {
+        name: "Dividenden",
+        series: dividendSeries
+      },
+      {
+        name: "Investiert",
+        series: investedSeries
+      },
+    ];
   }
 
   getUntilYear() {
@@ -81,5 +121,31 @@ export class CalculatorComponent {
     let sum = 0;
     this.result.forEach(y => sum += y.kpis.dividendPayout);
     return sum;
+  }
+
+  getAccumulatedDividendsReinvested() {
+    let sum = 0;
+    this.result.forEach(y => sum += y.kpis.dividendPayoutReinvested);
+    return sum;
+  }
+
+  getFinalDividendPercentage() {
+    return this.calculatorService.calculateDividendPercentage(
+      this.result[this.getYears()].kpis.dividendPercentage,
+      this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value);
+  }
+
+  getFinalDividendIncome() {
+    return this.calculatorService.calculateDividendPayout(
+      this.result[this.getYears()].kpis.accumulatedStockAmount + this.result[this.getYears()].shares.stocksBoughtFromDividends,
+      this.result[this.getYears()].dividend.currentDividendPerShare);
+  }
+
+  currencyFormatterLC(moneyAmount: any): string {
+    const currencyFormat = new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "EUR",
+    });
+    return currencyFormat.format(moneyAmount);
   }
 }

@@ -8,11 +8,12 @@ import {registerLocaleData} from "@angular/common";
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {CommunityComponent} from "./community/community.component";
+import {NewsComponent} from "./news/news.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent],
+  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -34,6 +35,10 @@ export class AppComponent {
     this.router.navigate(['/community']);
   }
 
+  showNews() {
+    this.router.navigate(['/news']);
+  }
+
   showImpressum() {
     this.router.navigate(['/imprint']);
   }
@@ -48,6 +53,10 @@ export class AppComponent {
 
   communityPage() {
     return this.router.url.includes('community');
+  }
+
+  newsPage() {
+    return this.router.url.includes('news');
   }
 
   imprintPage() {

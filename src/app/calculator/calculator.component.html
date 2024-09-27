@@ -5,18 +5,15 @@
     <h1>Dividendenrechner</h1>
   </div>
 
-  <div>
+  <div *ngIf="!showResult">
     <mat-card appearance="outlined">
       <mat-card-header>
-        <h2>Work-in-Progress</h2>
+        <h2>Neuigkeiten</h2>
       </mat-card-header>
       <mat-card-content>
-        <p>Hier entsteht der neue AktienTraum Dividendenrechner.</p>
-
-        <p>Solange diese Meldung erscheint, sollte noch der <a href="https://aktientraum.de/">bisherige
-          Dividendenrechner</a>
-          genutzt werden. Dies hier ist
-          work-in-progress :-)</p>
+        <app-news [showFull]="false"></app-news>
+        <p></p>
+        <a href="/news">Alle Neuigkeiten</a>
       </mat-card-content>
     </mat-card>
   </div>
@@ -49,9 +46,12 @@
                   matTooltip="Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.">
                 Simulierter Aktienkurs
               </th>
+              <th *ngIf="showStockColumns">Durchschn. Kaufkurs</th>
+              <th *ngIf="showStockColumns">Dividende pro Aktie</th>
+              <th *ngIf="showStockColumns">Dividenden-Rendite (%)</th>
               <th *ngIf="showStockColumns">Aktien Gesamt</th>
               <th *ngIf="showStockColumns">Aktien Jahr</th>
-              <th *ngIf="showStockColumns">Aktien Dividende (Jahresende)</th>
+              <th *ngIf="showStockColumns">Aktienkäufe aus Dividenden (Jahresende)</th>
               <th>Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</th>
               <th>Einzahlung Summe (ohne reinvestierte Dividenden) (€)</th>
               <th>Einzahlung aktuelles Jahr (€)</th>
@@ -59,11 +59,13 @@
               <th>Reinvestierte Dividenden aktuelles Jahr (€)</th>
               <th>Veränderung Dividende (€)</th>
               <th>Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)</th>
-              <th>Dividenden-Rendite (%)</th>
             </tr>
             <tr *ngFor="let elem of result; let y = index">
               <td>{{ currentYear + y }}</td>
               <td *ngIf="showStockColumns">{{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}</td>
+              <td *ngIf="showStockColumns">{{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}</td>
               <td *ngIf="showStockColumns">{{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }}</td>
               <td *ngIf="showStockColumns">{{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}</td>
               <td *ngIf="showStockColumns">{{ elem.shares.stocksBoughtFromDividends | number:'1.2-2':'de-DE' }}</td>
@@ -74,7 +76,6 @@
               <td>{{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}</td>
               <td>{{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}</td>
               <td>{{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}</td>
             </tr>
           </table>
         </div>
@@ -83,40 +84,95 @@
 
     <p></p>
 
-    <div>
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <h2>Zusammenfassung</h2>
-        </mat-card-header>
-        <mat-card-content>
-          <table>
-            <tr class="tableHeader">
-              <th colspan="2" class="summary">Zusammenfassung und passives Einkommen ab dem
-                Jahr {{ currentYear + getYears() + 1 }}
-              </th>
-            </tr>
-            <tr>
-              <td class="summaryCell">Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</td>
-              <td
-                class="summaryCell">{{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="summaryCell">Einzahlung Summe (ohne reinvestierte Dividenden) (€)</td>
-              <td
-                class="summaryCell">{{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
-              </td>
-            </tr>
-            <tr>
-              <td class="summaryCell">Dividenden über {{ getYears() }} Jahre (€)</td>
-              <td
-                class="summaryCell">{{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
-              </td>
-            </tr>
-
-          </table>
-        </mat-card-content>
-      </mat-card>
+    <div class="summary">
+      <div class="summaryResult">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <h2>Zusammenfassung</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <table>
+              <tr class="tableHeader">
+                <th colspan="2">Zusammenfassung und passives Einkommen ab dem
+                  Jahr {{ currentYear + getYears() + 1 }}
+                </th>
+              </tr>
+              <tr>
+                <td class="summaryCell">Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</td>
+                <td
+                  class="summaryCell">{{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Einzahlung Summe (ohne reinvestierte Dividenden) (€)</td>
+                <td
+                  class="summaryCell">{{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td
+                  class="summaryCell">{{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Davon reinvestierte Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td
+                  class="summaryCell">{{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Gesparte (nicht reinvestierte) Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td
+                  class="summaryCell">{{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Dividendenrendite im Jahr {{ currentYear + getYears() + 1 }} (%)</td>
+                <td
+                  class="summaryCell">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Jährliches passives Einkommen ab dem Jahr {{ currentYear + getYears() + 1 }} (€)
+                </td>
+                <td
+                  class="summaryCell">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summaryCell">Monatliches passives Einkommen ab dem Jahr {{ currentYear + getYears() + 1 }}
+                  (€)
+                </td>
+                <td
+                  class="summaryCell">{{ (getFinalDividendIncome() / 12) | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="chart">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <h2>Grafische Darstellung</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <ngx-charts-line-chart
+              [results]="data"
+              [view]="view"
+              [animations]="true"
+              [showGridLines]="true"
+              [legend]="true"
+              [legendTitle]="legendTitle"
+              [roundDomains]="true"
+              [xAxis]="true"
+              [yAxis]="true"
+              [yAxisTickFormatting]="currencyFormatterLC"
+            ></ngx-charts-line-chart>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 
@@ -141,7 +197,7 @@
             </mat-slider>
           </div>
           <div class="yearSlider">
-            Jahre zum Investieren: {{ getYears() }} (bis {{ getUntilYear() }})
+            Investitionszeitraum (Jahre): {{ getYears() }} (bis {{ getUntilYear() }})
           </div>
 
           <div class="formRow">
@@ -178,6 +234,13 @@
             </mat-form-field>
           </div>
 
+          <div class="formRow">
+            <mat-form-field>
+              <mat-label>Jährliche Kurssteigerung (%)</mat-label>
+              <input matInput type="number" formControlName="priceGainPercentage">
+            </mat-form-field>
+          </div>
+
           <div class="button-container">
             <button mat-fab extended (click)="doCalculate()">
               <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
@@ -189,4 +252,5 @@
     </div>
   </form>
 </div>
+
 

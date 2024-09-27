@@ -1,0 +1,40 @@
+@if (!showFull) {
+  <mat-card>
+    <mat-card-header class="newHeadline">Release 1.0.0</mat-card-header>
+    <mat-card-content>
+      <p>Die Vorschau-Phase ist abgeschlossen und das Release 1.0.0 ist jetzt online.</p>
+      <p>Es sind dei meisten Features des "alten" AktienTraum-Rechners implementiert, wobei der Berechnungsansatz
+        bereits ein Stück weit umgestellt wurde. Im Hintergrund wird jetzt der Kauf von Aktien simuliert.
+        Dies führt zu niedrigeren Ergebnissen im Vergleich zum bisherigen Dividendenrechner, allerdings sollten diese
+        deutlich realistischer sein.</p>
+      <p>In meinem Kopf schwirren noch eine Menge Ideen herum, so dass weitere Versionen hier nicht
+        lange auf sich warten lassen sollten.</p>
+    </mat-card-content>
+  </mat-card>
+}
+
+
+@if (showFull) {
+  <div class="page">
+
+    <div class="pageHeader">
+      <mat-icon class="icon" fontSet="material-symbols-rounded">brand_awareness</mat-icon>
+      <h1>Neuigkeiten</h1>
+    </div>
+
+    <mat-card>
+      <mat-card-header class="newHeadline">Release 1.0.0</mat-card-header>
+      <mat-card-content>
+        <p>Die Vorschau-Phase ist abgeschlossen und das Release 1.0.0 ist jetzt online.</p>
+        <p>Es sind dei meisten Features des "alten" AktienTraum-Rechners implementiert, wobei der Berechnungsansatz
+          bereits ein Stück weit umgestellt wurde. Im Hintergrund wird jetzt der Kauf von Aktien simuliert.
+          Dies führt zu niedrigeren Ergebnissen im Vergleich zum bisherigen Dividendenrechner, allerdings sollten diese
+          deutlich realistischer sein.</p>
+        <p>In meinem Kopf schwirren noch eine Menge Ideen herum, so dass weitere Versionen hier nicht
+          lange auf sich warten lassen sollten.</p>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+}
+

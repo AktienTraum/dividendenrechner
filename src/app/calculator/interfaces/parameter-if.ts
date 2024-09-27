@@ -6,4 +6,6 @@ export interface ParameterIF {
   initialDividendPercentage: number,
   yearlyDividendPercentageIncrease: number,
   years: number,
+  currentYear: number,
+  priceGainPercentage: number,
 }

@@ -78,3 +78,17 @@ tr:nth-child(even) {
 }
 
 
+.summary {
+  display: flex;
+  width: 100%;
+}
+
+.chart {
+  width: 65%;
+  padding-left: 16px;
+}
+
+.summaryResult {
+  width: 35%;
+}
+
