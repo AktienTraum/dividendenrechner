@@ -1,5 +1,6 @@
 export interface ParameterIF {
   initialInvestment: number,
+  initialPriceGains: number,
   yearlyInvestment: number,
   yearlyInvestmentIncrease: number,
   dividendReinvestmentPercentage: number,
@@ -8,4 +9,6 @@ export interface ParameterIF {
   years: number,
   currentYear: number,
   priceGainPercentage: number,
+  taxPercentage: number,
+  yearlyTaxFreeSum: number,
 }

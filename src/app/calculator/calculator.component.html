@@ -207,6 +207,18 @@
             </mat-form-field>
 
             <mat-form-field>
+              <mat-label>Bereits bestehende Kursgewinne (€)</mat-label>
+              <input matInput type="number" formControlName="initialPriceGains">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Erwartete jährliche Kurssteigerung (%)</mat-label>
+              <input min="0" max="100" matInput type="number" formControlName="priceGainPercentage">
+            </mat-form-field>
+          </div>
+
+          <div class="formRow">
+            <mat-form-field>
               <mat-label>Investitionsbetrag pro Jahr (€)</mat-label>
               <input matInput type="number" formControlName="yearlyInvestment">
             </mat-form-field>
@@ -215,34 +227,39 @@
               <mat-label>Jährliche Steigerung (€)</mat-label>
               <input matInput type="number" formControlName="yearlyInvestmentIncrease">
             </mat-form-field>
-          </div>
 
-          <div class="formRow">
             <mat-form-field>
               <mat-label>Re-Investition erhaltener Dividenden (%)</mat-label>
               <input matInput type="number" formControlName="dividendReinvestmentPercentage">
             </mat-form-field>
+          </div>
 
+          <div class="formRow">
             <mat-form-field>
               <mat-label>Initiale jährliche Dividendenrendite (%)</mat-label>
-              <input matInput type="number" formControlName="initialDividendPercentage">
+              <input min="0" max="100" matInput type="number" formControlName="initialDividendPercentage">
             </mat-form-field>
 
             <mat-form-field>
               <mat-label>Jährliche Steigerung der Dividende (%)</mat-label>
-              <input matInput type="number" formControlName="yearlyDividendPercentageIncrease">
+              <input min="0" max="100" matInput type="number" formControlName="yearlyDividendPercentageIncrease">
             </mat-form-field>
           </div>
 
           <div class="formRow">
             <mat-form-field>
-              <mat-label>Jährliche Kurssteigerung (%)</mat-label>
-              <input matInput type="number" formControlName="priceGainPercentage">
+              <mat-label>Steuern auf Dividenden (%)</mat-label>
+              <input min="0" max="100" matInput type="number" formControlName="taxPercentage">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Jährlicher Steuerfreibetrag (€)</mat-label>
+              <input min="0" matInput type="number" formControlName="yearlyTaxFreeSum">
             </mat-form-field>
           </div>
 
           <div class="button-container">
-            <button mat-fab extended (click)="doCalculate()">
+            <button mat-fab extended (click)="doCalculate()" [disabled]="!calculatorForm.valid">
               <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
               Berechnen
             </button>

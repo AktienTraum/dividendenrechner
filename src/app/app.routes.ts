@@ -13,7 +13,10 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), NgxChartsModule],
+  imports: [
+    RouterModule.forRoot(routes, {scrollPositionRestoration: "enabled"}),
+    NgxChartsModule,
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

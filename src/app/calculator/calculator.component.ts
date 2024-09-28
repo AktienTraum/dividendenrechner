@@ -7,8 +7,8 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {MatFabButton} from "@angular/material/button";
-import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
-import {CalculatorService} from "./calculator.service";
+import {DecimalPipe, NgForOf, NgIf, ViewportScroller} from "@angular/common";
+import {CalculatorService} from "../services/calculator.service";
 import {ParameterIF} from "./interfaces/parameter-if";
 import {CalculationIF} from "./interfaces/calculation-if";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -17,6 +17,7 @@ import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
 import {SeriesIF} from "./interfaces/series-if";
 import {NewsComponent} from "../news/news.component";
+import {FunctionsService} from "../services/functions.service";
 
 
 @Component({
@@ -45,7 +46,10 @@ export class CalculatorComponent implements OnInit {
   view: [number, number] = [900, 450];
   legendTitle = 'Legende';
 
-  constructor(private calculatorService: CalculatorService) {
+  constructor(
+    private functions: FunctionsService,
+    private calculatorService: CalculatorService,
+    private viewportScroller: ViewportScroller) {
     this.currentYear = new Date().getFullYear();
     this.initForm();
   }
@@ -59,6 +63,7 @@ export class CalculatorComponent implements OnInit {
   initForm() {
     this.calculatorForm = new FormGroup({
       initialInvestment: new FormControl(numberAttribute(10000)),
+      initialPriceGains: new FormControl(numberAttribute(3000)),
       yearlyInvestment: new FormControl(numberAttribute(1000)),
       yearlyInvestmentIncrease: new FormControl(numberAttribute(100)),
       dividendReinvestmentPercentage: new FormControl(numberAttribute(100)),
@@ -66,6 +71,8 @@ export class CalculatorComponent implements OnInit {
       yearlyDividendPercentageIncrease: new FormControl(numberAttribute(5)),
       years: new FormControl(numberAttribute(10)),
       priceGainPercentage: new FormControl(numberAttribute(3)),
+      taxPercentage: new FormControl(numberAttribute(26, 375)),
+      yearlyTaxFreeSum: new FormControl(numberAttribute(1000)),
     });
   }
 
@@ -73,6 +80,7 @@ export class CalculatorComponent implements OnInit {
     this.showResult = true;
     this.result = this.calculatorService.calculate({
       initialInvestment: this.calculatorForm.controls['initialInvestment'].value,
+      initialPriceGains: this.calculatorForm.controls['initialPriceGains'].value,
       yearlyInvestment: this.calculatorForm.controls['yearlyInvestment'].value,
       yearlyInvestmentIncrease: this.calculatorForm.controls['yearlyInvestmentIncrease'].value,
       dividendReinvestmentPercentage: this.calculatorForm.controls['dividendReinvestmentPercentage'].value,
@@ -81,6 +89,8 @@ export class CalculatorComponent implements OnInit {
       years: this.calculatorForm.controls['years'].value,
       currentYear: this.currentYear,
       priceGainPercentage: this.calculatorForm.controls['priceGainPercentage'].value,
+      taxPercentage: this.calculatorForm.controls['taxPercentage'].value,
+      yearlyTaxFreeSum: this.calculatorForm.controls['yearlyTaxFreeSum'].value,
     } as ParameterIF);
 
     let dividendSeries = this.result
@@ -107,6 +117,9 @@ export class CalculatorComponent implements OnInit {
         series: investedSeries
       },
     ];
+
+    this.viewportScroller.scrollToPosition([0, 0]);
+
   }
 
   getUntilYear() {
@@ -130,13 +143,13 @@ export class CalculatorComponent implements OnInit {
   }
 
   getFinalDividendPercentage() {
-    return this.calculatorService.calculateDividendPercentage(
+    return this.functions.calculateDividendPercentage(
       this.result[this.getYears()].kpis.dividendPercentage,
       this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value);
   }
 
   getFinalDividendIncome() {
-    return this.calculatorService.calculateDividendPayout(
+    return this.functions.calculateDividendPayout(
       this.result[this.getYears()].kpis.accumulatedStockAmount + this.result[this.getYears()].shares.stocksBoughtFromDividends,
       this.result[this.getYears()].dividend.currentDividendPerShare);
   }
