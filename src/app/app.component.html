@@ -82,7 +82,7 @@
 
     <div class="citation">
       <span class="citationText">
-        Wenn jemand gute Aktien hat, wäre er verrückt, wenn er nur wegen eines Kursrückschlags verkaufen würde. Ich suche Unternehmen, die ich verstehe und von deren Zukunftsaussichten ich überzeugt bin.
+        {{ "footer.cite" | translate }}
       </span>
       <br>
       <span class="citationAuthor">
@@ -92,10 +92,10 @@
 
     <div class="footerMenu">
       <p>
-        <span class="footerMenuItem" (click)="showImpressum()">Impressum</span>
+        <span class="footerMenuItem" (click)="showImpressum()">{{ "footer.menu.imprint" | translate }}</span>
       </p>
       <p>
-        <span class="footerMenuItem" (click)="showPrivacyPolicy()">Datenschutzerklärung</span>
+        <span class="footerMenuItem" (click)="showPrivacyPolicy()">{{ "footer.menu.privacy" | translate }}</span>
       </p>
     </div>
   </div>

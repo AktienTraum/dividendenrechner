@@ -8,5 +8,58 @@
       "news": "News",
       "documentation": "Documentation"
     }
+  },
+  "footer": {
+    "menu": {
+      "imprint": "Imprint",
+      "privacy": "Privacy Policy"
+    },
+    "cite": "If someone has good shares, they would be crazy to sell just because of a price setback. I look for companies that I understand and whose future prospects I am convinced of."
+  },
+  "calculator": {
+    "allnews": "All news",
+    "disclaimer": "All calculations on this page are made without guarantee and no guarantee can or will be given for the accuracy of the results.",
+    "result": {
+      "title": "Development over time",
+      "stocksimul": "Show stock simulation",
+      "tblheader": {
+        "col-1": ""
+      }
+    }
+  },
+  "community": {
+    "philosophy": {
+      "title": "Philosophy",
+      "content": "<p>The dividend calculator is purely a fun project without any commercial interest. Initially, I simply wanted to realize my idea of a dividend calculator. Then, especially via Twitter/X many great ideas flowed in.</p><p>So today I would say that this is already a small community project and I'm excited to see what time will bring.</p>"
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "E-mail address to come, but until then I can be reached via Twitter/X in any case:"
+    },
+    "sourcecode": {
+      "title": "Source Code",
+      "content": "If you are interested, you can view the source code for the project here:"
+    }
+  },
+  "news": {
+    "release-1.0.0": "<p>The preview phase has been completed and release 1.0.0 is now online.</p><p>Most of the features of the “old” AktienTraum calculator have been implemented, although the calculation approach has already been changed to some extent. The purchase of shares is now simulated in the background. This leads to lower results compared to the previous dividend calculator, but these should be much more realistic.</p><p>I still have a lot of ideas buzzing around in my head, so further versions should not be long in coming.</p>",
+    "release-1.0.1": "<p>FinTwit went straight into the test and noticed that the dividend is shown gross in the first year.</p><p>In principle, not much can be said about the current year, especially as this shows the sum of all previous years invested. This row in the results table is therefore is now highlighted in color and most of the values are not displayed.</p><p>This adjustment does not change the results of the calculation over time.</p>"
+  },
+  "documentation": {
+    "disclaimer": "<p>Compared to the “old” dividend calculator, which was still part of the AktienTraum blog (which no longer exists ;-)), there have been some fundamental changes in the calculation.</p><p>With the old calculator, the dividend yield was the leading factor. Over time, however, this became too large, as the dampening effect of price increases on the dividend yield was not taken into account.</p><p>To avoid this problem, the new dividend calculator simulates the purchase of shares in the background. The dividend is then calculated on these shares and this dividend - together with the share price - leads to the dividend yield.</p><p>Also, net values are now always used in the calculations, unless you enter zero for the interest rate. Only then is the capital available for share purchases from dividends realistic.</p><p>More details on the calculation are gradually being documented here and can of course also be found in the <a href=\"https://github.com/AktienTraum/dividendenrechner\" target=\"_blank\">source code</a>.</p>"
+  },
+  "imprint": {
+    "contact": "Contact",
+    "preface": "This is a purely private site without any commercial interest and therefore does not require an imprint.\n  Nevertheless, I would like to provide some basic information here.",
+    "header-1": "Liability for content",
+    "content-1": "No liability is assumed for the correctness or completeness of the calculations performed here.\n  All results may be incorrect and it is up to the user to check them. No decisions may be made\n  based on the\n  be made based on the results of this dividend calculator. This is purely a fun project\n  <p></p>\n  Obligations to remove or block the use of information in accordance with the general laws remain\n  remain unaffected by this.\n  However, liability in this respect is only possible from the time of knowledge of a specific infringement.\n  As soon as I become aware of any such legal infringements, I will remove this content immediately.",
+    "header-2": "Liability for links",
+    "content-2": "This website contains links to external websites of third parties over whose content I have no influence.\n  Therefore, I cannot accept any liability for this third-party content.\n  The respective provider or operator of the pages is always responsible for the content of the linked pages.\n  The linked pages were checked for possible legal violations at the time of linking.\n  Illegal content was not recognizable at the time of linking.\n  <p></p>\n  However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement.\n  infringement is not reasonable.\n  If I become aware of any legal infringements, I will remove such links immediately.",
+    "header-3": "Copyright",
+    "content-3": "The content and works created by the site operator on these pages are subject to German copyright law.\n  The reproduction, editing, distribution and any kind of utilization outside the limits of copyright law\n  require the written consent of the\n  written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial\n  commercial use permitted.\n  <p></p>\n  Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected.\n  In particular, third-party content is identified as such.\n  Should you nevertheless become aware of a copyright infringement, please notify me accordingly.\n  If I become aware of any infringements, I will remove such content immediately.",
+    "disclaimer": "Source: Loosely based on"
+  },
+  "privacy": {
+    "content": "No personal data is processed or stored on this website."
   }
 }

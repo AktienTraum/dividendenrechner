@@ -8,25 +8,24 @@
   <div *ngIf="!showResult">
     <mat-card appearance="outlined">
       <mat-card-header>
-        <h2>Neuigkeiten</h2>
+        <h2>{{ "header.menu.news" | translate }}</h2>
       </mat-card-header>
       <mat-card-content>
         <app-news [showFull]="false"></app-news>
         <p></p>
-        <a href="/news">Alle Neuigkeiten</a>
+        <a href="/news">{{ "calculator.allnews" | translate }}</a>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div *ngIf="showResult">
     <div class="disclaimer">
-      Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit
-      der Ergebnisse übernommen!
+      {{ "calculator.disclaimer" | translate }}
     </div>
 
     <mat-card appearance="outlined">
       <mat-card-header>
-        <h2>Entwicklung über die Zeit</h2>
+        <h2>{{ "calculator.result.title" | translate }}</h2>
       </mat-card-header>
       <mat-card-content>
 
@@ -34,7 +33,7 @@
           <mat-slide-toggle
             [checked]="showStockColumns"
             (click)="showStockColumns = !showStockColumns">
-            Zeige Aktien-Simulation
+            {{ "calculator.result.stocksimul" | translate }}
           </mat-slide-toggle>
         </div>
 

@@ -8,5 +8,58 @@
       "news": "Neuigkeiten",
       "documentation": "Dokumentation"
     }
+  },
+  "footer": {
+    "menu": {
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung"
+    },
+    "cite": " Wenn jemand gute Aktien hat, wäre er verrückt, wenn er nur wegen eines Kursrückschlags verkaufen würde. Ich suche Unternehmen, die ich verstehe und von deren Zukunftsaussichten ich überzeugt bin."
+  },
+  "calculator": {
+    "allnews": "Alle Neuigkeiten",
+    "disclaimer": "Alle Berechnungen auf dieser Seite erfolgen ohne Gewähr und es kann und wird keine Garantie für die Richtigkeit der Ergebnisse übernommen!",
+    "result": {
+      "title": "Entwicklung über die Zeit",
+      "stocksimul": "Zeige Aktien-Simulation",
+      "tblheader": {
+        "col-1": ""
+      }
+    }
+  },
+  "community": {
+    "philosophy": {
+      "title": "Philosophie",
+      "content": "<p>Der Dividendenrechner ist ein reines Spaßprojekt ohne irgendein kommerzielles Interesse. Ich wollte zunächst einfach meine Idee eines Dividendenrechners umsetzen. Insbesondere über Twitter/X sind dann viele super Ideen eingeflossen.</p><p>So würde ich heute sagen, dass ist bereits ein kleines Community-Projekt und ich bin gespannt was die Zeit hier noch bringt.</p>"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "content": "E-Mail Addresse kommt noch, aber bis dahin bin ich auf jeden Fall über Twitter/X zu erreichen:"
+    },
+    "sourcecode": {
+      "title": "Source Code",
+      "content": "Wer Interesse hat kann sich den Source Code zum Projekt gerne hier anschauen:"
+    }
+  },
+  "news": {
+    "release-1.0.0": "<p>Die Vorschau-Phase ist abgeschlossen und das Release 1.0.0 ist jetzt online.</p><p>Es sind dei meisten Features des \"alten\" AktienTraum-Rechners implementiert, wobei der Berechnungsansatz bereits ein Stück weit umgestellt wurde. Im Hintergrund wird jetzt der Kauf von Aktien simuliert. Dies führt zu niedrigeren Ergebnissen im Vergleich zum bisherigen Dividendenrechner, allerdings sollten diese deutlich realistischer sein.</p><p>In meinem Kopf schwirren noch eine Menge Ideen herum, so dass weitere Versionen hier nicht lange auf sich warten lassen sollten.</p>",
+    "release-1.0.1": "<p>FinTwit ist direkt in den Test gegangen und hat bemerkt, dass die Dividende im ersten Jahr brutto angezeigt wird.</p><p>Im Prinzip kann über das aktuelle Jahr nicht viel ausgesagt werden, zumal dies ja die Summe alle bisherigen Jahre anzeigt, die man investiert hat. Daher wird diese Zeile in der Ergebnistabelle jetzt farblich hervorgehoben und die meisten Werte werden nicht angezeigt.</p><p>An den Ergebnissen der Berechnung über die Zeit ändert sich durch diese Anpassung nichts.</p>"
+  },
+  "documentation": {
+    "disclaimer": "<p>Im Vergleich zum \"alten\" Dividendenrechner, der noch Teil es AktienTraum-Blogs war (den es nicht mehr gibt ;-)), hat es einige grundlegende Veränderungen in der Berechnung gegeben.</p><p>Bei dem alten Rechner war die Dividendenrendite der führende Faktor. Diese wurde aber mit der Zeit zu schnell zu groß, da u. A. die dämpfende Wirkung von Kurssteigerungen auf die Dividendenrendite nicht berücksichtigt wurde.</p><p>Um dieses Problem zu umgehen, simuliert der neue Dividendenrechner im Hintergrund den Kauf von Aktien. Auf diesen Aktien wird dann die Dividende berechnet und diese Dividende führt dann - zusammen mit dem Aktienkurs - zur Dividendenrendite.</p><p>Auch wird jetzt immer mit Netto-Werten gerechnet, es sei denn man gibt beim Zinssatz eine Null ein. Denn nur dann ist das zur Verfügung stehende Kapital für Aktienkäufe aus den Dividenden realistisch.</p><p>Mehr Details zur Berechnung werden hier nach und nach dokumentiert und sind ansonsten natürlich auch aus dem <a href=\"https://github.com/AktienTraum/dividendenrechner\" target=\"_blank\">Source Code</a> ersichtlich.</p>"
+  },
+  "imprint": {
+    "contact": "Kontakt",
+    "preface": "Dies ist eine rein private Seite ohne jegliches kommerzielles Interesse und benötigt damit kein Impressum.\n  Trotzdem möchte ich hier ein paar grundlegende Angaben machen.",
+    "header-1": "Haftung für Inhalte",
+    "content-1": "Es wird keine Haftung für die Korrektheit oder Vollständigkeit der hier durchgeführten Berechnungen übernommen.\n  Alle Ergebnisse können falsch sein und es obliegt dem Benutzer diese zu prüfen. Es dürfen keine Entscheidungen\n  basierend auf den\n  Ergebnissen dieses Dividenden-Rechners getroffen werden. Dies ist ein reines Spaßprojekt\n  <p></p>\n  Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben\n  hiervon unberührt.\n  Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.\n  Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden ich diese Inhalte umgehend entfernen.",
+    "header-2": "Haftung für Links",
+    "content-2": "Diese Webseite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss haben.\n  Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen.\n  Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.\n  Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.\n  Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.\n  <p></p>\n  Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer\n  Rechtsverletzung nicht zumutbar.\n  Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.",
+    "header-3": "Urheberrecht",
+    "content-3": "Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.\n  Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes\n  bedürfen der schriftlichen\n  Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht\n  kommerziellen Gebrauch gestattet.\n  <p></p>\n  Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet.\n  Insbesondere werden Inhalte Dritter als solche gekennzeichnet.\n  Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis.\n  Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.",
+    "disclaimer": "Quelle: Frei nach"
+  },
+  "privacy": {
+    "content": "Auf dieser Webseite werden keine personenbezogenen Daten verarbeitet oder gespeichert."
   }
 }
