@@ -49,7 +49,7 @@ export class CalculatorComponent implements OnInit {
     private functions: FunctionsService,
     private calculatorService: CalculatorService,
     private viewportScroller: ViewportScroller) {
-    this.currentYear = new Date().getFullYear();
+    this.currentYear = functions.currentYear();
     this.initForm();
   }
 
@@ -118,7 +118,6 @@ export class CalculatorComponent implements OnInit {
     ];
 
     this.viewportScroller.scrollToPosition([0, 0]);
-
   }
 
   getUntilYear() {
@@ -142,9 +141,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   getFinalDividendPercentage() {
-    return this.functions.calculateDividendPercentage(
-      this.result[this.getYears()].kpis.dividendPercentage,
-      this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value);
+    return this.result[this.getYears()].kpis.dividendPercentage;
   }
 
   getFinalDividendIncome() {

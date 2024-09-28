@@ -8,8 +8,8 @@ export class FunctionsService {
   constructor() {
   }
 
-  public calculateDividendPercentage(currentDividendPercentage: number, dividendPercentageIncrease: number) {
-    return currentDividendPercentage * (1 + (dividendPercentageIncrease / 100));
+  public currentYear() {
+    return new Date().getFullYear();
   }
 
   public calculateDividendPayout(stockAmount: number, currentDividendPerShare: number) {
