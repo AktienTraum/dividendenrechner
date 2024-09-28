@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {CalculationIF} from "../calculator/interfaces/calculation-if";
+import {CalculationIF} from "../interfaces/calculation-if";
 import {FunctionsService} from "./functions.service";
-import {ParameterIF} from "../calculator/interfaces/parameter-if";
+import {ParameterIF} from "../interfaces/parameter-if";
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,9 @@ export class SetupService {
       shares: {
         payment: parameters.initialInvestment,
         stockAmount: initialStockAmount,
-        stocksBoughtFromDividends: 0,
         purchasePrice: currentStockPrice,
         averagePurchasePrice: currentStockPrice,
-        dividendPayout: initialStockAmount * currentDividendPerShare,
+        dividendPayout: dividendPayout,
       },
       kpis: {
         accumulatedStockAmount: initialStockAmount,
@@ -40,9 +39,11 @@ export class SetupService {
         accumulatedDividendPayout: dividendPayout,
         accumulatedPayments: parameters.initialInvestment,
         accumulatedPaymentsIncludingDividends: parameters.initialInvestment,
+        accumulatedAssetsInclundingPriceGains: parameters.initialInvestment + parameters.initialPriceGains,
         yearlyInvestmentToReinvestedDividendFactor: 0,
         yearlyAbsoluteDividendGrowth: 0,
         year: parameters.currentYear,
+        accumulatedPriceGains: parameters.initialPriceGains,
       }
     } as CalculationIF;
   }

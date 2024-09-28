@@ -2,13 +2,12 @@ import {ChangeDetectionStrategy, Component, numberAttribute, OnInit} from '@angu
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
-import {MatStep, MatStepper} from "@angular/material/stepper";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {MatFabButton} from "@angular/material/button";
 import {DecimalPipe, NgForOf, NgIf, ViewportScroller} from "@angular/common";
-import {CalculatorService} from "../services/calculator.service";
+import {CalculatorService} from "./services/calculator.service";
 import {ParameterIF} from "./interfaces/parameter-if";
 import {CalculationIF} from "./interfaces/calculation-if";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -17,13 +16,13 @@ import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
 import {SeriesIF} from "./interfaces/series-if";
 import {NewsComponent} from "../news/news.component";
-import {FunctionsService} from "../services/functions.service";
+import {FunctionsService} from "./services/functions.service";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatStep, MatStepper, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -63,7 +62,7 @@ export class CalculatorComponent implements OnInit {
   initForm() {
     this.calculatorForm = new FormGroup({
       initialInvestment: new FormControl(numberAttribute(10000)),
-      initialPriceGains: new FormControl(numberAttribute(3000)),
+      initialPriceGains: new FormControl(numberAttribute(300)),
       yearlyInvestment: new FormControl(numberAttribute(1000)),
       yearlyInvestmentIncrease: new FormControl(numberAttribute(100)),
       dividendReinvestmentPercentage: new FormControl(numberAttribute(100)),
@@ -150,7 +149,7 @@ export class CalculatorComponent implements OnInit {
 
   getFinalDividendIncome() {
     return this.functions.calculateDividendPayout(
-      this.result[this.getYears()].kpis.accumulatedStockAmount + this.result[this.getYears()].shares.stocksBoughtFromDividends,
+      this.result[this.getYears()].kpis.accumulatedStockAmount,
       this.result[this.getYears()].dividend.currentDividendPerShare);
   }
 
