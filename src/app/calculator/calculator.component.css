@@ -84,3 +84,6 @@ tr:nth-child(even) {
   width: 35%;
 }
 
+.baseRow {
+  background-color: lightblue;
+}

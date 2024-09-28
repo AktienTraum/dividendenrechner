@@ -59,28 +59,84 @@
               <th class="priceGains">Kursgewinne</th>
               <th class="priceGains">Summe Vermögen (inkl. Kurgewinne)</th>
             </tr>
-            <tr *ngFor="let elem of result; let y = index">
-              <td>{{ currentYear + y }}</td>
-              <td *ngIf="showStockColumns">{{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}</td>
-              <td *ngIf="showStockColumns">{{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}</td>
-              <td *ngIf="showStockColumns">
-                {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
-                {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%
-              </td>
-              <td *ngIf="showStockColumns">
-                {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
-                {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}
-              </td>
-              <td>{{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.shares.payment | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.accumulatedPriceGains | number:'1.2-2':'de-DE' }}</td>
-              <td>{{ elem.kpis.accumulatedAssetsInclundingPriceGains | number:'1.2-2':'de-DE' }}</td>
-            </tr>
+            <ng-container *ngFor="let elem of result; let y = index">
+              <tr [matTooltip]="contentRowTooltip(y)">
+                <td [ngClass]="{'baseRow': y == 0}">
+                  {{ currentYear + y }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}" *ngIf="showStockColumns">
+                  {{ elem.shares.purchasePrice | number:'1.2-2':'de-DE' }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}" *ngIf="showStockColumns">
+                  {{ elem.shares.averagePurchasePrice | number:'1.2-2':'de-DE' }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}" *ngIf="showStockColumns">
+                  {{ elem.dividend.currentDividendPerShare | number:'1.2-2':'de-DE' }}€ /
+                  {{ elem.kpis.dividendPercentage | number:'1.2-2':'de-DE' }}%
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}" *ngIf="showStockColumns">
+                  {{ elem.kpis.accumulatedStockAmount | number:'1.2-2':'de-DE' }} /
+                  {{ elem.shares.stockAmount | number:'1.2-2':'de-DE' }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  {{ elem.kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.shares.payment | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.kpis.dividendPayout | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.kpis.dividendPayoutReinvested | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.kpis.yearlyAbsoluteDividendGrowth | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  <span *ngIf="y > 0">
+                    {{ elem.kpis.yearlyInvestmentToReinvestedDividendFactor | number:'1.2-2':'de-DE' }}
+                  </span>
+                  <span *ngIf="y == 0">
+                    -
+                  </span>
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  {{ elem.kpis.accumulatedPriceGains | number:'1.2-2':'de-DE' }}
+                </td>
+                <td [ngClass]="{'baseRow': y == 0}">
+                  {{ elem.kpis.accumulatedAssetsInclundingPriceGains | number:'1.2-2':'de-DE' }}
+                </td>
+              </tr>
+            </ng-container>
           </table>
         </div>
       </mat-card-content>

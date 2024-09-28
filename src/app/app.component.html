@@ -32,7 +32,8 @@
     </div>
   </div>
 
-  @if (calculatorPage()) {
+  @if (calculatorPage()
+  || (!communityPage() && !newsPage() && !documentationPage() && !imprintPage() && !privacyPolicyPage())) {
     <div class="content">
       <app-calculator></app-calculator>
     </div>
@@ -94,7 +95,7 @@
   </div>
 
   <div class="copyright">
-    Copyright © 2024 AktienTraum - Release 1.0.0 (28.09.2024)
+    Copyright © 2024 AktienTraum - Release 1.0.1 (28.09.2024)
   </div>
 
 </div>

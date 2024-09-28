@@ -23,4 +23,9 @@ export class FunctionsService {
   public calculateInvestedDividendsFactor(dividendPayout: number, dividendReinvestmentPercentage: number) {
     return dividendPayout * dividendReinvestmentPercentage / 100;
   }
+
+  public calculateTaxPayment(dividendPayout: number, taxPercentage: number, yearlyTaxFreeSum: number) {
+    let taxRelevantSum = dividendPayout - yearlyTaxFreeSum;
+    return taxRelevantSum * taxPercentage / 100;
+  }
 }

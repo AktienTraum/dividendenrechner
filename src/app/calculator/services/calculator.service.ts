@@ -56,8 +56,8 @@ export class CalculatorService {
 
       // Adjust to taxes on dividends
       if (dividendPayout > parameters.yearlyTaxFreeSum) {
-        let taxRelevantSum = dividendPayout - parameters.yearlyTaxFreeSum;
-        let taxPayment = taxRelevantSum * parameters.taxPercentage / 100;
+        let taxPayment =
+          this.functions.calculateTaxPayment(dividendPayout, parameters.taxPercentage, parameters.yearlyTaxFreeSum)
         let stocksBoughtFromTaxPayment = this.functions.calculateStockAmount(taxPayment, currentStockPrice);
 
         dividendPayout -= taxPayment;

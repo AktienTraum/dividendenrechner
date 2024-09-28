@@ -11,6 +11,7 @@ export const routes: Routes = [
   {path: 'documentation', component: AppComponent},
   {path: 'imprint', component: AppComponent},
   {path: 'privacy-policy', component: AppComponent},
+  {path: '**', component: AppComponent},
 ];
 
 @NgModule({

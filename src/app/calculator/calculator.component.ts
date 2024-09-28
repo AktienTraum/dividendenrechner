@@ -6,7 +6,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {MatFabButton} from "@angular/material/button";
-import {DecimalPipe, NgForOf, NgIf, ViewportScroller} from "@angular/common";
+import {DecimalPipe, NgClass, NgForOf, NgIf, ViewportScroller} from "@angular/common";
 import {CalculatorService} from "./services/calculator.service";
 import {ParameterIF} from "./interfaces/parameter-if";
 import {CalculationIF} from "./interfaces/calculation-if";
@@ -22,7 +22,7 @@ import {FunctionsService} from "./services/functions.service";
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -155,4 +155,14 @@ export class CalculatorComponent implements OnInit {
     });
     return currencyFormat.format(moneyAmount);
   }
+
+  contentRowTooltip(rowNum: number) {
+    if (rowNum == 0) {
+      return 'Das aktuelle Jahr spielt eine gewisse Sonderrolle, da es nur die Vorgabewerte beinhaltet. ' +
+        'Die Berechnungen starten - basierend auf diesen Werten - mit dem ersten zukünftigem Jahr.';
+    } else {
+      return '';
+    }
+  }
+
 }
