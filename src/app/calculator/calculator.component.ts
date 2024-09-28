@@ -145,9 +145,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   getFinalDividendIncome() {
-    return this.functions.calculateDividendPayout(
-      this.result[this.getYears()].kpis.accumulatedStockAmount,
-      this.result[this.getYears()].dividend.currentDividendPerShare);
+    return this.result[this.getYears()].kpis.dividendPayout;
   }
 
   currencyFormatterLC(moneyAmount: any): string {

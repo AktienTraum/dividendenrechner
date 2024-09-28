@@ -34,17 +34,6 @@
   width: 200px;
 }
 
-.disclaimer {
-  border-left: 2px solid #000;
-  padding-left: 8px;
-  background: #DFDFFE;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  margin-top: 16px;
-  width: 100%;
-}
-
 .summaryCell {
   max-width: 50%;
   background: white;

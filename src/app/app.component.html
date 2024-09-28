@@ -24,6 +24,10 @@
           <mat-icon class="icon" fontSet="material-symbols-rounded">brand_awareness</mat-icon>
           Neuigkeiten
         </div>
+        <div class="mainMenuItem" (click)="showDocumentation()">
+          <mat-icon class="icon" fontSet="material-symbols-rounded">menu_book</mat-icon>
+          Dokumentation
+        </div>
       </div>
     </div>
   </div>
@@ -43,6 +47,12 @@
   @if (newsPage()) {
     <div class="content">
       <app-news [showFull]="true"></app-news>
+    </div>
+  }
+
+  @if (documentationPage()) {
+    <div class="content">
+      <app-documentation></app-documentation>
     </div>
   }
 
@@ -84,7 +94,7 @@
   </div>
 
   <div class="copyright">
-    Copyright © 2024 AktienTraum - Release 1.0.0 (27.09.2024)
+    Copyright © 2024 AktienTraum - Release 1.0.0 (28.09.2024)
   </div>
 
 </div>

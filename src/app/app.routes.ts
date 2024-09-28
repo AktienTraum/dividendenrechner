@@ -8,6 +8,7 @@ export const routes: Routes = [
   {path: 'calculator', component: AppComponent},
   {path: 'community', component: AppComponent},
   {path: 'news', component: AppComponent},
+  {path: 'documentation', component: AppComponent},
   {path: 'imprint', component: AppComponent},
   {path: 'privacy-policy', component: AppComponent},
 ];

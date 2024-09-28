@@ -9,11 +9,12 @@ import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {CommunityComponent} from "./community/community.component";
 import {NewsComponent} from "./news/news.component";
+import {DocumentationComponent} from "./documentation/documentation.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent],
+  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent, DocumentationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -39,6 +40,10 @@ export class AppComponent {
     this.router.navigate(['/news']);
   }
 
+  showDocumentation() {
+    this.router.navigate(['/documentation']);
+  }
+
   showImpressum() {
     this.router.navigate(['/imprint']);
   }
@@ -57,6 +62,10 @@ export class AppComponent {
 
   newsPage() {
     return this.router.url.includes('news');
+  }
+
+  documentationPage() {
+    return this.router.url.includes('documentation');
   }
 
   imprintPage() {
