@@ -1,34 +1,40 @@
 <div class="container">
 
   <div class="headerContainer">
+
     <div class="header">
       <div>
         <img src="images/logo.png" width="100px" height="100px"/>
       </div>
 
       <div class="title">
-        <span class="mainTitle">DividendenTraum</span><br>
-        <span class="subTitle">Der AktienTraum Dividendenrechner</span>
+        <span class="mainTitle">{{ "header.title" | translate }}</span><br>
+        <span class="subTitle">{{ "header.subtitle" | translate }}</span>
       </div>
 
       <div class="mainMenu">
         <div class="mainMenuItem" (click)="showCalculator()">
           <mat-icon class="icon" fontSet="material-symbols-rounded">function</mat-icon>
-          Dividendenrechner
+          {{ "header.menu.calculator" | translate }}
         </div>
         <div class="mainMenuItem" (click)="showCommunity()">
           <mat-icon class="icon" fontSet="material-symbols-rounded">groups</mat-icon>
-          Community
+          {{ "header.menu.community" | translate }}
         </div>
         <div class="mainMenuItem" (click)="showNews()">
           <mat-icon class="icon" fontSet="material-symbols-rounded">brand_awareness</mat-icon>
-          Neuigkeiten
+          {{ "header.menu.news" | translate }}
         </div>
         <div class="mainMenuItem" (click)="showDocumentation()">
           <mat-icon class="icon" fontSet="material-symbols-rounded">menu_book</mat-icon>
-          Dokumentation
+          {{ "header.menu.documentation" | translate }}
         </div>
       </div>
+    </div>
+
+    <div class="languageSelection">
+      <img src="images/german-flag.png" width="25px" height="15px" (click)="switchToGerman()"/>
+      <img class="englishFlag" src="images/english-flag.png" width="25px" height="15px" (click)="switchToEnglish()"/>
     </div>
   </div>
 

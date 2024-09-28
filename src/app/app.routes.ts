@@ -2,6 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from "./app.component";
 import {NgModule} from "@angular/core";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {NgxTranslateModule} from "./translate/translate.module";
 
 export const routes: Routes = [
   {path: '', component: AppComponent}, //default route
@@ -14,12 +15,15 @@ export const routes: Routes = [
   {path: '**', component: AppComponent},
 ];
 
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {scrollPositionRestoration: "enabled"}),
     NgxChartsModule,
+    NgxTranslateModule,
   ],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }

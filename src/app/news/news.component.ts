@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {NgxTranslateModule} from "../translate/translate.module";
 
 @Component({
   selector: 'app-news',
@@ -9,7 +10,8 @@ import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
     MatIcon,
     MatCard,
     MatCardHeader,
-    MatCardContent
+    MatCardContent,
+    NgxTranslateModule
   ],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'

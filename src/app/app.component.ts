@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {CalculatorComponent} from "./calculator/calculator.component";
 import {MatIcon} from "@angular/material/icon";
@@ -10,22 +10,32 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import {CommunityComponent} from "./community/community.component";
 import {NewsComponent} from "./news/news.component";
 import {DocumentationComponent} from "./documentation/documentation.component";
+import {TranslateService} from "@ngx-translate/core";
+import {NgxTranslateModule} from "./translate/translate.module";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent, DocumentationComponent],
+  imports: [NgxTranslateModule, RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent, DocumentationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-
-  constructor(private router: Router) {
+export class AppComponent implements OnInit {
+  
+  constructor(private router: Router, private translate: TranslateService) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   }
 
-  openGithub() {
-    window.open('https://github.com/AktienTraum/dividendenrechner', '_blank');
+  ngOnInit(): void {
+    this.switchToGerman();
+  }
+
+  switchToGerman() {
+    this.translate.use('de');
+  }
+
+  switchToEnglish() {
+    this.translate.use('en');
   }
 
   showCalculator() {

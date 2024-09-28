@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
+import {NgxTranslateModule} from "../translate/translate.module";
 
 @Component({
   selector: 'app-documentation',
@@ -9,7 +10,8 @@ import {MatIcon} from "@angular/material/icon";
     MatCard,
     MatCardContent,
     MatCardHeader,
-    MatIcon
+    MatIcon,
+    NgxTranslateModule
   ],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.css'

@@ -1,0 +1,12 @@
+{
+  "header": {
+    "title": "Dividend Dream",
+    "subtitle": "AktienTraum's Dividend Calculator",
+    "menu": {
+      "calculator": "Dividend Calculator",
+      "community": "Community",
+      "news": "News",
+      "documentation": "Documentation"
+    }
+  }
+}

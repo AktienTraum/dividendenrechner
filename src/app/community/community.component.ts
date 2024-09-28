@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {NgxTranslateModule} from "../translate/translate.module";
 
 @Component({
   selector: 'app-community',
@@ -9,7 +10,8 @@ import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
     MatIcon,
     MatCard,
     MatCardContent,
-    MatCardHeader
+    MatCardHeader,
+    NgxTranslateModule
   ],
   templateUrl: './community.component.html',
   styleUrl: './community.component.css'

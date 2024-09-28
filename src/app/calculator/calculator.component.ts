@@ -17,12 +17,13 @@ import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
 import {SeriesIF} from "./interfaces/series-if";
 import {NewsComponent} from "../news/news.component";
 import {FunctionsService} from "./services/functions.service";
+import {NgxTranslateModule} from "../translate/translate.module";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass, NgxTranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',

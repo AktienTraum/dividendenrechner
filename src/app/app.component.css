@@ -7,6 +7,18 @@
   transform: scale(1.1);
 }
 
+.languageSelection {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.englishFlag {
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
 .headerContainer {
   position: fixed;
   top: 0;
