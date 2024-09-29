@@ -18,6 +18,7 @@ import {SeriesIF} from "./interfaces/series-if";
 import {NewsComponent} from "../news/news.component";
 import {FunctionsService} from "./services/functions.service";
 import {NgxTranslateModule} from "../translate/translate.module";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -44,10 +45,10 @@ export class CalculatorComponent implements OnInit {
 
   data: any;
   view: [number, number] = [900, 450];
-  legendTitle = 'Legende';
 
   constructor(
-    private functions: FunctionsService,
+    functions: FunctionsService,
+    private translate: TranslateService,
     private calculatorService: CalculatorService,
     private viewportScroller: ViewportScroller) {
     this.currentYear = functions.currentYear();
@@ -57,6 +58,16 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
     this.calculatorForm.valueChanges.subscribe(value => {
       this.showResult = false;
+    });
+
+    // Just to load the translation
+    this.translate.get('calculator.result.firstrow-tt').subscribe((translated: string) => {
+    });
+    this.translate.get('calculator.graph.legend').subscribe((translated: string) => {
+    });
+    this.translate.get('calculator.graph.value-1').subscribe((translated: string) => {
+    });
+    this.translate.get('calculator.graph.value-2').subscribe((translated: string) => {
     });
   }
 
@@ -109,11 +120,11 @@ export class CalculatorComponent implements OnInit {
 
     this.data = [
       {
-        name: "Dividenden",
+        name: this.translate.instant('calculator.graph.value-1'),
         series: dividendSeries
       },
       {
-        name: "Investiert",
+        name: this.translate.instant('calculator.graph.value-2'),
         series: investedSeries
       },
     ];
@@ -159,11 +170,14 @@ export class CalculatorComponent implements OnInit {
 
   contentRowTooltip(rowNum: number) {
     if (rowNum == 0) {
-      return 'Das aktuelle Jahr spielt eine gewisse Sonderrolle, da es nur die Vorgabewerte beinhaltet. ' +
-        'Die Berechnungen starten - basierend auf diesen Werten - mit dem ersten zukünftigem Jahr.';
+      return this.translate.instant('calculator.result.firstrow-tt');
     } else {
       return '';
     }
+  }
+
+  graphLegend() {
+    return this.translate.instant('calculator.graph.legend');
   }
 
 }

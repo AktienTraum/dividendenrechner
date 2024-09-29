@@ -40,23 +40,23 @@
         <div>
           <table>
             <tr class="tableHeader">
-              <th>Jahr</th>
+              <th>{{ "calculator.result.tblheader.col-1" | translate }}</th>
               <th *ngIf="showStockColumns"
-                  matTooltip="Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.">
-                Simulierter Aktienkurs
+                  matTooltip="{{ 'calculator.result.tblheader.col-2-tt' | translate }}">
+                {{ "calculator.result.tblheader.col-2" | translate }}
               </th>
-              <th *ngIf="showStockColumns">Durchschn. Kaufkurs</th>
-              <th *ngIf="showStockColumns">Dividende pro Aktie / Dividenden-Rendite</th>
-              <th *ngIf="showStockColumns">Aktien Gesamt / Jahr</th>
-              <th>Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</th>
-              <th>Einzahlung Summe (ohne reinvestierte Dividenden) (€)</th>
-              <th>Einzahlung aktuelles Jahr (€)</th>
-              <th>Dividenden aktuelles Jahr (€)</th>
-              <th>Reinvestierte Dividenden aktuelles Jahr (€)</th>
-              <th>Veränderung Dividende (€)</th>
-              <th>Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)</th>
-              <th class="priceGains">Kursgewinne</th>
-              <th class="priceGains">Summe Vermögen (inkl. Kurgewinne)</th>
+              <th *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-3" | translate }}</th>
+              <th *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-4" | translate }}</th>
+              <th *ngIf="showStockColumns">{{ "calculator.result.tblheader.col-5" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-6" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-7" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-8" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-9" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-10" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-11" | translate }}</th>
+              <th>{{ "calculator.result.tblheader.col-12" | translate }}</th>
+              <th class="priceGains">{{ "calculator.result.tblheader.col-13" | translate }}</th>
+              <th class="priceGains">{{ "calculator.result.tblheader.col-14" | translate }}</th>
             </tr>
             <ng-container *ngFor="let elem of result; let y = index">
               <tr [matTooltip]="contentRowTooltip(y)">
@@ -147,60 +147,66 @@
       <div class="summaryResult">
         <mat-card appearance="outlined">
           <mat-card-header>
-            <h2>Zusammenfassung</h2>
+            <h2>{{ "calculator.summary.title" | translate }}</h2>
           </mat-card-header>
           <mat-card-content>
             <table>
               <tr class="tableHeader">
-                <th colspan="2">Zusammenfassung und passives Einkommen ab dem
-                  Jahr {{ currentYear + getYears() + 1 }}
+                <th
+                  colspan="2">{{ "calculator.summary.tbl-header" | translate }}&nbsp;{{ currentYear + getYears() + 1 }}
                 </th>
               </tr>
               <tr>
-                <td class="summaryCell">Einzahlung Summe (inkl. reinvestierte Dividenden) (€)</td>
+                <td class="summaryCell">{{ "calculator.summary.tblrow.row-1" | translate }}</td>
                 <td
                   class="summaryCell">{{ result[getYears()].kpis.accumulatedPaymentsIncludingDividends | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Einzahlung Summe (ohne reinvestierte Dividenden) (€)</td>
+                <td class="summaryCell">{{ "calculator.summary.tblrow.row-2" | translate }}</td>
                 <td
                   class="summaryCell">{{ result[getYears()].kpis.accumulatedPayments | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td class="summaryCell">{{ "calculator.summary.tblrow.row-3" | translate: {value: getYears()} }}</td>
                 <td
                   class="summaryCell">{{ getAccumulatedDividends() | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Davon reinvestierte Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td class="summaryCell">{{ "calculator.summary.tblrow.row-4" | translate: {value: getYears()} }}</td>
                 <td
                   class="summaryCell">{{ getAccumulatedDividendsReinvested() | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Gesparte (nicht reinvestierte) Dividenden über {{ getYears() }} Jahre (€)</td>
+                <td class="summaryCell">{{ "calculator.summary.tblrow.row-5" | translate: {value: getYears()} }}</td>
                 <td
                   class="summaryCell">{{ (getAccumulatedDividends() - getAccumulatedDividendsReinvested()) | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Dividendenrendite im Jahr {{ currentYear + getYears() + 1 }} (%)</td>
+                <td
+                  class="summaryCell">{{ "calculator.summary.tblrow.row-6" | translate }} {{ currentYear + getYears() + 1 }}
+                  (%)
+                </td>
                 <td
                   class="summaryCell">{{ getFinalDividendPercentage() | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Jährliches passives Einkommen ab dem Jahr {{ currentYear + getYears() + 1 }} (€)
+                <td
+                  class="summaryCell">{{ "calculator.summary.tblrow.row-7" | translate }} {{ currentYear + getYears() + 1 }}
+                  (€)
                 </td>
                 <td
                   class="summaryCell">{{ getFinalDividendIncome() | number:'1.2-2':'de-DE' }}
                 </td>
               </tr>
               <tr>
-                <td class="summaryCell">Monatliches passives Einkommen ab dem Jahr {{ currentYear + getYears() + 1 }}
+                <td
+                  class="summaryCell">{{ "calculator.summary.tblrow.row-8" | translate }} {{ currentYear + getYears() + 1 }}
                   (€)
                 </td>
                 <td
@@ -214,7 +220,7 @@
       <div class="chart">
         <mat-card appearance="outlined">
           <mat-card-header>
-            <h2>Grafische Darstellung</h2>
+            <h2>{{ "calculator.graph.title" | translate }}</h2>
           </mat-card-header>
           <mat-card-content>
             <ngx-charts-line-chart
@@ -223,7 +229,7 @@
               [animations]="true"
               [showGridLines]="true"
               [legend]="true"
-              [legendTitle]="legendTitle"
+              [legendTitle]="graphLegend()"
               [roundDomains]="true"
               [xAxis]="true"
               [yAxis]="true"
@@ -241,7 +247,7 @@
     <div class="formContainer">
       <mat-card appearance="outlined">
         <mat-card-header>
-          <h2>Berechnungsgrundlage</h2>
+          <h2>{{ "calculator.form.title" | translate }}</h2>
         </mat-card-header>
         <mat-card-content>
 
@@ -256,63 +262,64 @@
             </mat-slider>
           </div>
           <div class="yearSlider">
-            Investitionszeitraum (Jahre): {{ getYears() }} (bis {{ getUntilYear() }})
+            {{ "calculator.form.interval" | translate }}: {{ getYears() }}
+            ({{ "calculator.form.until" | translate }} {{ getUntilYear() }})
           </div>
 
           <div class="formRow">
             <mat-form-field>
-              <mat-label>Bereits investiertes Kapital (€)</mat-label>
+              <mat-label>{{ "calculator.form.initialInvestment" | translate }}</mat-label>
               <input matInput type="number" formControlName="initialInvestment">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Bereits bestehende Kursgewinne (€)</mat-label>
+              <mat-label>{{ "calculator.form.initialPriceGains" | translate }}</mat-label>
               <input matInput type="number" formControlName="initialPriceGains">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Erwartete jährliche Kurssteigerung (%)</mat-label>
+              <mat-label>{{ "calculator.form.priceGainPercentage" | translate }}</mat-label>
               <input min="0" max="100" matInput type="number" formControlName="priceGainPercentage">
             </mat-form-field>
           </div>
 
           <div class="formRow">
             <mat-form-field>
-              <mat-label>Investitionsbetrag pro Jahr (€)</mat-label>
+              <mat-label>{{ "calculator.form.yearlyInvestment" | translate }}</mat-label>
               <input matInput type="number" formControlName="yearlyInvestment">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Jährliche Steigerung (€)</mat-label>
+              <mat-label>{{ "calculator.form.yearlyInvestmentIncrease" | translate }}</mat-label>
               <input matInput type="number" formControlName="yearlyInvestmentIncrease">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Re-Investition erhaltener Dividenden (%)</mat-label>
+              <mat-label>{{ "calculator.form.dividendReinvestmentPercentage" | translate }}</mat-label>
               <input matInput type="number" formControlName="dividendReinvestmentPercentage">
             </mat-form-field>
           </div>
 
           <div class="formRow">
             <mat-form-field>
-              <mat-label>Initiale jährliche Dividendenrendite (%)</mat-label>
+              <mat-label>{{ "calculator.form.initialDividendPercentage" | translate }}</mat-label>
               <input min="0" max="100" matInput type="number" formControlName="initialDividendPercentage">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Jährliche Steigerung der Dividende (%)</mat-label>
+              <mat-label>{{ "calculator.form.yearlyDividendPercentageIncrease" | translate }}</mat-label>
               <input min="0" max="100" matInput type="number" formControlName="yearlyDividendPercentageIncrease">
             </mat-form-field>
           </div>
 
           <div class="formRow">
             <mat-form-field>
-              <mat-label>Steuern auf Dividenden (%)</mat-label>
+              <mat-label>{{ "calculator.form.taxPercentage" | translate }}</mat-label>
               <input min="0" max="100" matInput type="number" formControlName="taxPercentage">
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Jährlicher verfügbarer Steuerfreibetrag (€)</mat-label>
+              <mat-label>{{ "calculator.form.yearlyTaxFreeSum" | translate }}</mat-label>
               <input min="0" matInput type="number" formControlName="yearlyTaxFreeSum">
             </mat-form-field>
           </div>
@@ -320,7 +327,7 @@
           <div class="button-container">
             <button mat-fab extended (click)="doCalculate()" [disabled]="!calculatorForm.valid">
               <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
-              Berechnen
+              {{ "calculator.form.submit" | translate }}
             </button>
           </div>
         </mat-card-content>

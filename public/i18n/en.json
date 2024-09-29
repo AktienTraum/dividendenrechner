@@ -23,8 +23,59 @@
       "title": "Development over time",
       "stocksimul": "Show stock simulation",
       "tblheader": {
-        "col-1": ""
+        "col-1": "Year",
+        "col-2": "Simulated stock price",
+        "col-2-tt": "Share purchases at this price are simulated for the calculation.",
+        "col-3": "Average purchase price (€)",
+        "col-4": "Dividend per share / Dividend yield",
+        "col-5": "Total shares / Year",
+        "col-6": "Total payment (incl. reinvested dividends) (€)",
+        "col-7": "Total payment (without reinvested dividends) (€)",
+        "col-8": "Payment current year (€)",
+        "col-9": "Dividends current year (€)",
+        "col-10": "Reinvested dividends current year (€)",
+        "col-11": "Change in dividend (€)",
+        "col-12": "Annual reinvested dividend / Annual investment contribution (Factor)",
+        "col-13": "Price gains (€)",
+        "col-14": "Total assets (incl. capital gains) (€)"
+      },
+      "firstrow-tt": "The current year plays a special role, as it only contains the default values. The calculations start - based on these values - with the first future year."
+    },
+    "summary": {
+      "title": "Summary",
+      "tbl-header": "Summary and passive income from the year",
+      "tblrow": {
+        "row-1": "Total payment (incl. reinvested dividends) (€)",
+        "row-2": "Total payment (without reinvested dividends) (€)",
+        "row-3": "Dividends over {{value}} years (€)",
+        "row-4": "Of which reinvested dividends over {{value}} years (€)",
+        "row-5": "Saved (not reinvested) dividends over {{value}} years (€)",
+        "row-6": "Dividend yield per year",
+        "row-7": "Annual passive income from year",
+        "row-8": "Monthly passive income from year"
       }
+    },
+    "graph": {
+      "title": "Graphical Representation",
+      "legend": "Legend",
+      "value-1": "Dividend",
+      "value-2": "Invested"
+    },
+    "form": {
+      "title": "Basis of Calculation",
+      "submit": "Calculate",
+      "interval": "Investment period (years)",
+      "until": "until",
+      "initialInvestment": "Capital already invested (€)",
+      "initialPriceGains": "Existing price gains (€)",
+      "priceGainPercentage": "Expected annual price increase (%)",
+      "yearlyInvestment": "Investment per year (€)",
+      "yearlyInvestmentIncrease": "Annual increase (€)",
+      "dividendReinvestmentPercentage": "Re-investment of dividends received",
+      "initialDividendPercentage": "Initial annual dividend yield (%)",
+      "yearlyDividendPercentageIncrease": "Annual increase in dividend (%)",
+      "taxPercentage": "Taxes on dividends (%)",
+      "yearlyTaxFreeSum": "Annual tax allowance available (€)"
     }
   },
   "community": {

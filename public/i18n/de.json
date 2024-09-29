@@ -23,8 +23,59 @@
       "title": "Entwicklung über die Zeit",
       "stocksimul": "Zeige Aktien-Simulation",
       "tblheader": {
-        "col-1": ""
+        "col-1": "Jahr",
+        "col-2": "Simulierter Aktienkurs",
+        "col-2-tt": "Für die Berechnung werden Aktienkäufe zu diesem Kurs simuliert.",
+        "col-3": "Durchschn. Kaufkurs (€)",
+        "col-4": "Dividende pro Aktie / Dividenden-Rendite",
+        "col-5": "Aktien Gesamt / Jahr",
+        "col-6": "Einzahlung Summe (inkl. reinvestierte Dividenden) (€)",
+        "col-7": "Einzahlung Summe (ohne reinvestierte Dividenden) (€)",
+        "col-8": "Einzahlung aktuelles Jahr (€)",
+        "col-9": "Dividenden aktuelles Jahr (€)",
+        "col-10": "Reinvestierte Dividenden aktuelles Jahr (€)",
+        "col-11": "Veränderung Dividende (€)",
+        "col-12": "Jährliche reinvestierte Dividende / Jährlicher Investitionsbeitrag (Faktor)",
+        "col-13": "Kursgewinne (€)",
+        "col-14": "Summe Vermögen (inkl. Kurgewinne) (€)"
+      },
+      "firstrow-tt": "Das aktuelle Jahr spielt eine gewisse Sonderrolle, da es nur die Vorgabewerte beinhaltet. Die Berechnungen starten - basierend auf diesen Werten - mit dem ersten zukünftigem Jahr."
+    },
+    "summary": {
+      "title": "Zusammenfassung",
+      "tbl-header": "Zusammenfassung und passives Einkommen ab dem Jahr",
+      "tblrow": {
+        "row-1": "Einzahlung Summe (inkl. reinvestierte Dividenden) (€)",
+        "row-2": "Einzahlung Summe (ohne reinvestierte Dividenden) (€)",
+        "row-3": "Dividenden über {{value}} Jahre (€)",
+        "row-4": "Davon reinvestierte Dividenden über {{value}} Jahre (€)",
+        "row-5": "Gesparte (nicht reinvestierte) Dividenden über {{value}} Jahre (€)",
+        "row-6": "Dividendenrendite im Jahr",
+        "row-7": "Jährliches passives Einkommen ab dem Jahr",
+        "row-8": "Monatliches passives Einkommen ab dem Jahr"
       }
+    },
+    "graph": {
+      "title": "Grafische Darstellung",
+      "legend": "Legende",
+      "value-1": "Dividenden",
+      "value-2": "Investiert"
+    },
+    "form": {
+      "title": "Berechnungsgrundlage",
+      "submit": "Berechnen",
+      "interval": "Investitionszeitraum (Jahre)",
+      "until": "bis",
+      "initialInvestment": "Bereits investiertes Kapital (€)",
+      "initialPriceGains": "Bereits bestehende Kursgewinne (€)",
+      "priceGainPercentage": "Erwartete jährliche Kurssteigerung (%)",
+      "yearlyInvestment": "Investitionsbetrag pro Jahr (€)",
+      "yearlyInvestmentIncrease": "Jährliche Steigerung (€)",
+      "dividendReinvestmentPercentage": "Re-Investition erhaltener Dividenden",
+      "initialDividendPercentage": "Initiale jährliche Dividendenrendite (%)",
+      "yearlyDividendPercentageIncrease": "Jährliche Steigerung der Dividende (%)",
+      "taxPercentage": "Steuern auf Dividenden (%)",
+      "yearlyTaxFreeSum": "Jährlicher verfügbarer Steuerfreibetrag (€)"
     }
   },
   "community": {
