@@ -3,11 +3,11 @@
   <div class="headerContainer">
 
     <div class="header">
-      <div>
+      <div class="logo" (click)="showCalculator()">
         <img src="images/logo.png" width="100px" height="100px"/>
       </div>
 
-      <div class="title">
+      <div class="title" (click)="showCalculator()">
         <span class="mainTitle">{{ "header.title" | translate }}</span><br>
         <span class="subTitle">{{ "header.subtitle" | translate }}</span>
       </div>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="languageSelection">
-      <img src="images/german-flag.png" width="25px" height="15px" (click)="switchToGerman()"/>
+      <img class="germanFlag" src="images/german-flag.png" width="25px" height="15px" (click)="switchToGerman()"/>
       <img class="englishFlag" src="images/english-flag.png" width="25px" height="15px" (click)="switchToEnglish()"/>
     </div>
   </div>
@@ -101,7 +101,7 @@
   </div>
 
   <div class="copyright">
-    Copyright © 2024 AktienTraum - Release 1.0.1 (28.09.2024)
+    Copyright © 2024 AktienTraum - Release 2.0.0 (30.09.2024)
   </div>
 
 </div>

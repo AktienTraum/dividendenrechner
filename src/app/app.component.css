@@ -7,6 +7,10 @@
   transform: scale(1.1);
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .languageSelection {
   display: flex;
   width: 100%;
@@ -17,6 +21,11 @@
 .englishFlag {
   margin-left: 4px;
   margin-right: 8px;
+  cursor: pointer;
+}
+
+.germanFlag {
+  cursor: pointer;
 }
 
 .headerContainer {
@@ -40,6 +49,7 @@
 .title {
   margin-left: 24px;
   margin-top: 16px;
+  cursor: pointer;
 }
 
 .mainTitle {
