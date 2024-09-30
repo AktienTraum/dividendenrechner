@@ -14,17 +14,18 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
-import {SeriesIF} from "./interfaces/series-if";
 import {NewsComponent} from "../news/news.component";
 import {FunctionsService} from "./services/functions.service";
 import {NgxTranslateModule} from "../translate/translate.module";
 import {TranslateService} from "@ngx-translate/core";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {GraphService} from "./services/graph.service";
 
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass, NgxTranslateModule],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass, NgxTranslateModule, MatTabGroup, MatTab],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -43,13 +44,15 @@ export class CalculatorComponent implements OnInit {
 
   result: CalculationIF[] = [];
 
-  data: any;
+  dataPayments: any;
+  dataTotalAssets: any;
   view: [number, number] = [900, 450];
 
   constructor(
     functions: FunctionsService,
     private translate: TranslateService,
     private calculatorService: CalculatorService,
+    private graphService: GraphService,
     private viewportScroller: ViewportScroller) {
     this.currentYear = functions.currentYear();
     this.initForm();
@@ -63,17 +66,20 @@ export class CalculatorComponent implements OnInit {
     // Just to load the translation
     this.translate.get('calculator.result.firstrow-tt').subscribe((translated: string) => {
     });
-    this.translate.get('calculator.graph.legend').subscribe((translated: string) => {
+    this.translate.get('calculator.graph.investing.legend').subscribe((translated: string) => {
     });
-    this.translate.get('calculator.graph.value-1').subscribe((translated: string) => {
+    this.translate.get('calculator.graph.investing.value-1').subscribe((translated: string) => {
     });
-    this.translate.get('calculator.graph.value-2').subscribe((translated: string) => {
+    this.translate.get('calculator.graph.investing.value-2').subscribe((translated: string) => {
+    });
+    this.translate.get('calculator.graph.investing.value-3').subscribe((translated: string) => {
     });
   }
 
   initForm() {
     this.calculatorForm = new FormGroup({
       initialInvestment: new FormControl(numberAttribute(10000)),
+      initialDividends: new FormControl(numberAttribute(350)),
       initialPriceGains: new FormControl(numberAttribute(300)),
       yearlyInvestment: new FormControl(numberAttribute(1000)),
       yearlyInvestmentIncrease: new FormControl(numberAttribute(100)),
@@ -82,7 +88,7 @@ export class CalculatorComponent implements OnInit {
       yearlyDividendPercentageIncrease: new FormControl(numberAttribute(5)),
       years: new FormControl(numberAttribute(10)),
       priceGainPercentage: new FormControl(numberAttribute(3)),
-      taxPercentage: new FormControl(numberAttribute(26, 375)),
+      taxPercentage: new FormControl(numberAttribute(26.375)),
       yearlyTaxFreeSum: new FormControl(numberAttribute(1000)),
     });
   }
@@ -91,6 +97,7 @@ export class CalculatorComponent implements OnInit {
     this.showResult = true;
     this.result = this.calculatorService.calculate({
       initialInvestment: this.calculatorForm.controls['initialInvestment'].value,
+      initialDividends: this.calculatorForm.controls['initialDividends'].value,
       initialPriceGains: this.calculatorForm.controls['initialPriceGains'].value,
       yearlyInvestment: this.calculatorForm.controls['yearlyInvestment'].value,
       yearlyInvestmentIncrease: this.calculatorForm.controls['yearlyInvestmentIncrease'].value,
@@ -104,30 +111,16 @@ export class CalculatorComponent implements OnInit {
       yearlyTaxFreeSum: this.calculatorForm.controls['yearlyTaxFreeSum'].value,
     } as ParameterIF);
 
-    let dividendSeries = this.result
-      .filter(x => x.kpis.year != this.currentYear)
-      .map(x => ({
-        value: x.kpis.dividendPayout,
-        name: x.kpis.year.toString()
-      } as SeriesIF));
-
-    let investedSeries = this.result
-      .filter(x => x.kpis.year != this.currentYear)
-      .map(x => ({
-        value: x.shares.payment,
-        name: x.kpis.year.toString()
-      } as SeriesIF));
-
-    this.data = [
-      {
-        name: this.translate.instant('calculator.graph.value-1'),
-        series: dividendSeries
-      },
-      {
-        name: this.translate.instant('calculator.graph.value-2'),
-        series: investedSeries
-      },
-    ];
+    this.dataPayments = this.graphService.getPaymentData(this.result,
+      this.currentYear,
+      this.translate.instant('calculator.graph.investing.value-1'),
+      this.translate.instant('calculator.graph.investing.value-2'),
+      this.translate.instant('calculator.graph.investing.value-3'));
+    this.dataTotalAssets = this.graphService.getTotalAssetsData(this.result,
+      this.currentYear,
+      this.translate.instant('calculator.graph.totalassets.value-1'),
+      this.translate.instant('calculator.graph.totalassets.value-2'),
+      this.translate.instant('calculator.graph.totalassets.value-3'));
 
     this.viewportScroller.scrollToPosition([0, 0]);
   }
@@ -179,5 +172,4 @@ export class CalculatorComponent implements OnInit {
   graphLegend() {
     return this.translate.instant('calculator.graph.legend');
   }
-
 }

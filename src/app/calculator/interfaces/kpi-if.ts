@@ -9,5 +9,6 @@ export interface KpiIF {
   yearlyInvestmentToReinvestedDividendFactor: number,
   yearlyAbsoluteDividendGrowth: number,
   year: number,
-  accumulatedPriceGains: number
+  accumulatedPriceGains: number,
+  investedSumPerYear: number,
 }

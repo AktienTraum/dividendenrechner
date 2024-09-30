@@ -1,4 +1,4 @@
-export interface SeriesIF {
+export interface LineseriesIf {
   value: number,
   name: string,
 }

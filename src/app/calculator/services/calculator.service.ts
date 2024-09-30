@@ -72,7 +72,7 @@ export class CalculatorService {
         + yearlyStockAmount * currentStockPrice) / (result[i - 1].kpis.accumulatedStockAmount + yearlyStockAmount);
 
       accumulatedPriceGains =
-        parameters.initialPriceGains + (averageStockPrice * accumulatedStockAmount * parameters.priceGainPercentage / 100);
+        parameters.initialPriceGains + (currentStockPrice * accumulatedStockAmount - averageStockPrice * accumulatedStockAmount);
       accumulatedPayments += investedSumPerYear;
       accumulatedPaymentsIncludingDividends += investedSumPerYear + dividendPayout;
       accumulatedAssetsInclundingPriceGains = accumulatedPaymentsIncludingDividends + accumulatedPriceGains
@@ -82,13 +82,13 @@ export class CalculatorService {
           currentDividendPerShare: currentDividendPerShare,
         },
         shares: {
-          payment: investedSumPerYear,
           stockAmount: yearlyStockAmount,
           purchasePrice: currentStockPrice,
           averagePurchasePrice: averageStockPrice,
           dividendPayout: yearlyStockAmount * currentDividendPerShare,
         },
         kpis: {
+          investedSumPerYear: investedSumPerYear,
           accumulatedStockAmount: accumulatedStockAmount,
           dividendPayout: dividendPayout,
           dividendPayoutReinvested: investedDividendFactor,
