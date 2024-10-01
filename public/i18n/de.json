@@ -74,6 +74,8 @@
     "form": {
       "title": "Berechnungsgrundlage",
       "submit": "Berechnen",
+      "save": "Parameter speichern",
+      "load": "Parameter laden",
       "interval": "Investitionszeitraum (Jahre)",
       "until": "bis",
       "initialInvestment": "Bereits investiertes Kapital (€)",
@@ -125,5 +127,10 @@
   },
   "privacy": {
     "content": "Auf dieser Webseite werden keine personenbezogenen Daten verarbeitet oder gespeichert."
+  },
+  "messages": {
+    "parameterssaved": "Die Parameter wurden im Browser gespeichert.",
+    "parametersloaded": "Die Parameter wurden aus dem Browser geladen.",
+    "parametersloadederror": "Es wurden noch keine Parameter in diesem Browser gespeichert oder es ist ein Fehler aufgetreten."
   }
 }

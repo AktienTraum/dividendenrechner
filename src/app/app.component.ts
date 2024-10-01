@@ -12,16 +12,19 @@ import {NewsComponent} from "./news/news.component";
 import {DocumentationComponent} from "./documentation/documentation.component";
 import {TranslateService} from "@ngx-translate/core";
 import {NgxTranslateModule} from "./translate/translate.module";
+import {NgToastModule, ToasterPosition} from "ng-angular-popup";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgxTranslateModule, RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent, DocumentationComponent],
+  imports: [NgToastModule, NgxTranslateModule, RouterOutlet, CalculatorComponent, MatIcon, ImprintComponent, PrivacyPolicyComponent, CommunityComponent, NewsComponent, DocumentationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  
+  ToasterPosition = ToasterPosition;
+
   constructor(private router: Router, private translate: TranslateService) {
     registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   }
@@ -32,6 +35,8 @@ export class AppComponent implements OnInit {
 
   switchToGerman() {
     this.translate.use('de');
+    this.translate.get('dialog.save.title').subscribe((translated: string) => {
+    });
   }
 
   switchToEnglish() {

@@ -1,15 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpClient, provideHttpClient} from "@angular/common/http";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {provideHttpClient} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {StaticTranslationLoader} from "./static-translations-loader";
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http,
-    './i18n/',
-    '.json');
-}
-
+//
+// see https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular-app-with-ngx-translate
+//
 
 @NgModule({
   declarations: [],
@@ -19,8 +16,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'de',
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        useClass: StaticTranslationLoader,
       },
     }),
   ],

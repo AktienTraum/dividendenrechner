@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@swimlane/ngx-charts": "^20.5.0",
     "material-symbols": "^0.23.0",
+    "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

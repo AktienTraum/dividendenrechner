@@ -358,6 +358,16 @@
               <mat-icon fontSet="material-symbols-rounded">money_bag</mat-icon>
               {{ "calculator.form.submit" | translate }}
             </button>
+
+            <button mat-fab extended (click)="doLoad()" [disabled]="!calculatorForm.valid">
+              <mat-icon fontSet="material-symbols-rounded">upload_file</mat-icon>
+              {{ "calculator.form.load" | translate }}
+            </button>
+
+            <button mat-fab extended (click)="doSave()" [disabled]="!calculatorForm.valid">
+              <mat-icon fontSet="material-symbols-rounded">save</mat-icon>
+              {{ "calculator.form.save" | translate }}
+            </button>
           </div>
         </mat-card-content>
       </mat-card>

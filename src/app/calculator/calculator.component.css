@@ -30,8 +30,8 @@
 
 .button-container {
   display: flex;
-  justify-content: center;
-  width: 200px;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .summaryCell {
@@ -86,4 +86,8 @@ tr:nth-child(even) {
 
 .baseRow {
   background-color: lightblue;
+}
+
+button {
+  margin-right: 16px;
 }

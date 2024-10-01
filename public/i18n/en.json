@@ -74,6 +74,8 @@
     "form": {
       "title": "Basis of Calculation",
       "submit": "Calculate",
+      "save": "Save Parameters",
+      "load": "Load Parameters",
       "interval": "Investment period (years)",
       "until": "until",
       "initialInvestment": "Capital already invested (€)",
@@ -125,5 +127,10 @@
   },
   "privacy": {
     "content": "No personal data is processed or stored on this website."
+  },
+  "messages": {
+    "parameterssaved": "Parameters have been saved in browser.",
+    "parametersloaded": "Parameter have been restored from Browser.",
+    "parametersloadederror": "No parameters have been saved in this browser or an error has occurred."
   }
 }

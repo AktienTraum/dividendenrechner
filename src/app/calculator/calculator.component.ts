@@ -20,7 +20,7 @@ import {NgxTranslateModule} from "../translate/translate.module";
 import {TranslateService} from "@ngx-translate/core";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {GraphService} from "./services/graph.service";
-
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-calculator',
@@ -35,7 +35,6 @@ import {GraphService} from "./services/graph.service";
 })
 
 export class CalculatorComponent implements OnInit {
-
   calculatorForm!: FormGroup;
   showResult = false;
   showStockColumns = false;
@@ -53,7 +52,8 @@ export class CalculatorComponent implements OnInit {
     private translate: TranslateService,
     private calculatorService: CalculatorService,
     private graphService: GraphService,
-    private viewportScroller: ViewportScroller) {
+    private viewportScroller: ViewportScroller,
+    private toaster: NgToastService) {
     this.currentYear = functions.currentYear();
     this.initForm();
   }
@@ -61,18 +61,6 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
     this.calculatorForm.valueChanges.subscribe(value => {
       this.showResult = false;
-    });
-
-    // Just to load the translation
-    this.translate.get('calculator.result.firstrow-tt').subscribe((translated: string) => {
-    });
-    this.translate.get('calculator.graph.investing.legend').subscribe((translated: string) => {
-    });
-    this.translate.get('calculator.graph.investing.value-1').subscribe((translated: string) => {
-    });
-    this.translate.get('calculator.graph.investing.value-2').subscribe((translated: string) => {
-    });
-    this.translate.get('calculator.graph.investing.value-3').subscribe((translated: string) => {
     });
   }
 
@@ -95,21 +83,7 @@ export class CalculatorComponent implements OnInit {
 
   doCalculate() {
     this.showResult = true;
-    this.result = this.calculatorService.calculate({
-      initialInvestment: this.calculatorForm.controls['initialInvestment'].value,
-      initialDividends: this.calculatorForm.controls['initialDividends'].value,
-      initialPriceGains: this.calculatorForm.controls['initialPriceGains'].value,
-      yearlyInvestment: this.calculatorForm.controls['yearlyInvestment'].value,
-      yearlyInvestmentIncrease: this.calculatorForm.controls['yearlyInvestmentIncrease'].value,
-      dividendReinvestmentPercentage: this.calculatorForm.controls['dividendReinvestmentPercentage'].value,
-      initialDividendPercentage: this.calculatorForm.controls['initialDividendPercentage'].value,
-      yearlyDividendPercentageIncrease: this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value,
-      years: this.calculatorForm.controls['years'].value,
-      currentYear: this.currentYear,
-      priceGainPercentage: this.calculatorForm.controls['priceGainPercentage'].value,
-      taxPercentage: this.calculatorForm.controls['taxPercentage'].value,
-      yearlyTaxFreeSum: this.calculatorForm.controls['yearlyTaxFreeSum'].value,
-    } as ParameterIF);
+    this.result = this.calculatorService.calculate(this.getFormValues());
 
     this.dataPayments = this.graphService.getPaymentData(this.result,
       this.currentYear,
@@ -171,5 +145,56 @@ export class CalculatorComponent implements OnInit {
 
   graphLegend() {
     return this.translate.instant('calculator.graph.legend');
+  }
+
+  doSave() {
+    localStorage.setItem('dividendenTraum-parameters', JSON.stringify(this.getFormValues()));
+    this.toaster.info(this.translate.instant('messages.parameterssaved'), '', 5000);
+  }
+
+  doLoad() {
+    let item = localStorage.getItem('dividendenTraum-parameters');
+    if (item != null) {
+      let parameters = JSON.parse(item) as ParameterIF;
+      this.setFormValues(parameters);
+      this.toaster.info(this.translate.instant('messages.parametersloaded'), '', 5000);
+    } else {
+      this.toaster.danger(this.translate.instant('messages.parametersloadederror'), '', 5000);
+    }
+
+
+  }
+
+  getFormValues() {
+    return {
+      initialInvestment: this.calculatorForm.controls['initialInvestment'].value,
+      initialDividends: this.calculatorForm.controls['initialDividends'].value,
+      initialPriceGains: this.calculatorForm.controls['initialPriceGains'].value,
+      yearlyInvestment: this.calculatorForm.controls['yearlyInvestment'].value,
+      yearlyInvestmentIncrease: this.calculatorForm.controls['yearlyInvestmentIncrease'].value,
+      dividendReinvestmentPercentage: this.calculatorForm.controls['dividendReinvestmentPercentage'].value,
+      initialDividendPercentage: this.calculatorForm.controls['initialDividendPercentage'].value,
+      yearlyDividendPercentageIncrease: this.calculatorForm.controls['yearlyDividendPercentageIncrease'].value,
+      years: this.calculatorForm.controls['years'].value,
+      currentYear: this.currentYear,
+      priceGainPercentage: this.calculatorForm.controls['priceGainPercentage'].value,
+      taxPercentage: this.calculatorForm.controls['taxPercentage'].value,
+      yearlyTaxFreeSum: this.calculatorForm.controls['yearlyTaxFreeSum'].value,
+    } as ParameterIF;
+  }
+
+  setFormValues(parameters: ParameterIF) {
+    this.calculatorForm.controls['initialInvestment'].setValue(parameters.initialInvestment)
+    this.calculatorForm.controls['initialDividends'].setValue(parameters.initialDividends);
+    this.calculatorForm.controls['initialPriceGains'].setValue(parameters.initialPriceGains);
+    this.calculatorForm.controls['yearlyInvestment'].setValue(parameters.yearlyInvestment);
+    this.calculatorForm.controls['yearlyInvestmentIncrease'].setValue(parameters.yearlyInvestmentIncrease);
+    this.calculatorForm.controls['dividendReinvestmentPercentage'].setValue(parameters.dividendReinvestmentPercentage);
+    this.calculatorForm.controls['initialDividendPercentage'].setValue(parameters.initialDividendPercentage);
+    this.calculatorForm.controls['yearlyDividendPercentageIncrease'].setValue(parameters.yearlyDividendPercentageIncrease);
+    this.calculatorForm.controls['years'].setValue(parameters.years);
+    this.calculatorForm.controls['priceGainPercentage'].setValue(parameters.priceGainPercentage);
+    this.calculatorForm.controls['taxPercentage'].setValue(parameters.taxPercentage);
+    this.calculatorForm.controls['yearlyTaxFreeSum'].setValue(parameters.yearlyTaxFreeSum);
   }
 }
