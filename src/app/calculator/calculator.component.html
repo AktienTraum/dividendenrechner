@@ -359,12 +359,14 @@
               {{ "calculator.form.submit" | translate }}
             </button>
 
-            <button mat-fab extended (click)="doLoad()" [disabled]="!calculatorForm.valid">
+            <button mat-fab extended (click)="doLoad()" [disabled]="!calculatorForm.valid"
+                    matTooltip='{{ "calculator.form.load-tooltip" | translate }}'>
               <mat-icon fontSet="material-symbols-rounded">upload_file</mat-icon>
               {{ "calculator.form.load" | translate }}
             </button>
 
-            <button mat-fab extended (click)="doSave()" [disabled]="!calculatorForm.valid">
+            <button mat-fab extended (click)="doSave()" [disabled]="!calculatorForm.valid"
+                    matTooltip='{{ "calculator.form.save-tooltip" | translate }}'>
               <mat-icon fontSet="material-symbols-rounded">save</mat-icon>
               {{ "calculator.form.save" | translate }}
             </button>
