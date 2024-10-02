@@ -359,13 +359,13 @@
               {{ "calculator.form.submit" | translate }}
             </button>
 
-            <button mat-fab extended (click)="doLoad()" [disabled]="!calculatorForm.valid"
+            <button mat-fab extended (click)="doLoadStorage()" [matMenuTriggerFor]="loadMenu"
                     matTooltip='{{ "calculator.form.load-tooltip" | translate }}'>
               <mat-icon fontSet="material-symbols-rounded">upload_file</mat-icon>
               {{ "calculator.form.load" | translate }}
             </button>
 
-            <button mat-fab extended (click)="doSave()" [disabled]="!calculatorForm.valid"
+            <button mat-fab extended [matMenuTriggerFor]="saveMenu" [disabled]="!calculatorForm.valid"
                     matTooltip='{{ "calculator.form.save-tooltip" | translate }}'>
               <mat-icon fontSet="material-symbols-rounded">save</mat-icon>
               {{ "calculator.form.save" | translate }}
@@ -377,4 +377,24 @@
   </form>
 </div>
 
+<mat-menu #loadMenu="matMenu" yPosition="above">
+  <button mat-menu-item (click)="doLoadItem(0)"
+          [disabled]="!storageData[0].inuse">{{ "calculator.form.slot-1" | translate }}
+  </button>
+  <button mat-menu-item (click)="doLoadItem(1)"
+          [disabled]="!storageData[1].inuse">{{ "calculator.form.slot-2" | translate }}
+  </button>
+  <button mat-menu-item (click)="doLoadItem(2)"
+          [disabled]="!storageData[2].inuse">{{ "calculator.form.slot-3" | translate }}
+  </button>
+  <button mat-menu-item (click)="doLoadItem(3)"
+          [disabled]="!storageData[2].inuse">{{ "calculator.form.slot-4" | translate }}
+  </button>
+</mat-menu>
 
+<mat-menu #saveMenu="matMenu" yPosition="above">
+  <button mat-menu-item (click)="doSave(0)">{{ "calculator.form.slot-1" | translate }}</button>
+  <button mat-menu-item (click)="doSave(1)">{{ "calculator.form.slot-2" | translate }}</button>
+  <button mat-menu-item (click)="doSave(2)">{{ "calculator.form.slot-3" | translate }}</button>
+  <button mat-menu-item (click)="doSave(3)">{{ "calculator.form.slot-4" | translate }} 3</button>
+</mat-menu>

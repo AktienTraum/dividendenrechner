@@ -21,11 +21,14 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {GraphService} from "./services/graph.service";
 import {NgToastService} from "ng-angular-popup";
+import {StorageService} from "../storage/storage.service";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {StorageIf} from "../storage/storage-if";
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass, NgxTranslateModule, MatTabGroup, MatTab],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, FormsModule, MatSlider, MatSliderThumb, MatFabButton, NgIf, NgForOf, DecimalPipe, MatSlideToggle, MatTooltip, MatCard, MatCardContent, MatCardHeader, BarChartModule, LineChartModule, NewsComponent, NgClass, NgxTranslateModule, MatTabGroup, MatTab, MatMenu, MatMenuTrigger, MatMenuItem],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css',
@@ -47,15 +50,21 @@ export class CalculatorComponent implements OnInit {
   dataTotalAssets: any;
   view: [number, number] = [900, 450];
 
+  storageData: StorageIf[];
+
   constructor(
     functions: FunctionsService,
     private translate: TranslateService,
     private calculatorService: CalculatorService,
     private graphService: GraphService,
+    private storageService: StorageService,
     private viewportScroller: ViewportScroller,
     private toaster: NgToastService) {
+
     this.currentYear = functions.currentYear();
     this.initForm();
+    this.storageData = this.storageService.load();
+
   }
 
   ngOnInit(): void {
@@ -147,22 +156,23 @@ export class CalculatorComponent implements OnInit {
     return this.translate.instant('calculator.graph.legend');
   }
 
-  doSave() {
-    localStorage.setItem('dividendenTraum-parameters', JSON.stringify(this.getFormValues()));
+  doSave(id: number) {
+    this.storageService.save(id, this.getFormValues());
     this.toaster.info(this.translate.instant('messages.parameterssaved'), '', 5000);
   }
 
-  doLoad() {
-    let item = localStorage.getItem('dividendenTraum-parameters');
-    if (item != null) {
-      let parameters = JSON.parse(item) as ParameterIF;
+  doLoadStorage() {
+    this.storageData = this.storageService.load();
+  }
+
+  doLoadItem(id: number) {
+    if (this.storageData[id].params != null) {
+      let parameters = this.storageData[id].params;
       this.setFormValues(parameters);
       this.toaster.info(this.translate.instant('messages.parametersloaded'), '', 5000);
     } else {
       this.toaster.danger(this.translate.instant('messages.parametersloadederror'), '', 5000);
     }
-
-
   }
 
   getFormValues() {
