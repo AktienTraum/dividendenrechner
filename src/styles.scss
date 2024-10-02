@@ -51,5 +51,13 @@ html {
   width: 100%;
 }
 
+a {
+  color: #4DB9F8;
+}
+
+a:visited {
+  color: #4DB9F8;
+}
+
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);

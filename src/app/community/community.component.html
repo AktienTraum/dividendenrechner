@@ -6,16 +6,29 @@
   </div>
 
   <div>
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <h2>{{ "community.philosophy.title" | translate }}</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <span
-          [innerHTML]="'community.philosophy.content' | translate">
-        </span>
-      </mat-card-content>
-    </mat-card>
+    <div class="row">
+      <mat-card appearance="outlined" class="philosophy">
+        <mat-card-header>
+          <h2>{{ "community.philosophy.title" | translate }}</h2>
+        </mat-card-header>
+        <mat-card-content>
+          <span
+            [innerHTML]="'community.philosophy.content' | translate">
+          </span>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="tools">
+        <mat-card-header>
+          <h2>{{ "community.tools.title" | translate }}</h2>
+        </mat-card-header>
+        <mat-card-content>
+          <span
+            [innerHTML]="'community.tools.content' | translate">
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
     <p></p>
 
